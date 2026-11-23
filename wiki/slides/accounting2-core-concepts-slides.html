@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>初級會計學（二）核心章節精華導讀 | 企管系教學簡報</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- KaTeX CDN for Math Formula Rendering -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+          onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0f7ff',
+              100: '#e0effe',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              800: '#1e40af',
+              900: '#1e3a8a',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700;900&display=swap');
+    body {
+      font-family: 'Noto Sans TC', system-ui, -apple-system, sans-serif;
+    }
+    .slide {
+      display: none;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+    }
+    .slide.active {
+      display: flex;
+      opacity: 1;
+    }
+    .badge-subtle {
+      background: rgba(37, 99, 235, 0.1);
+      color: #1d4ed8;
+      border: 1px solid rgba(37, 99, 235, 0.2);
+    }
+    .formula-box {
+      background: #f8fafc;
+      border-left: 4px solid #3b82f6;
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between select-none overflow-hidden">
+
+  <!-- 頂部進度條與全域狀態列 -->
+  <header class="w-full bg-slate-900/80 backdrop-blur border-b border-slate-800 px-6 py-2.5 flex items-center justify-between text-xs z-20">
+    <div class="flex items-center space-x-3">
+      <span class="w-2.5 h-2.5 rounded-full bg-blue-500 animate-pulse"></span>
+      <span class="font-semibold tracking-wider text-slate-200">初級會計學（二）核心重點概念導讀</span>
+      <span class="text-slate-500">|</span>
+      <span class="text-slate-400">Weygandt IFRS 5th Edition</span>
+    </div>
+
+    <!-- 中間章節快速切換按鈕組 -->
+    <div class="hidden md:flex items-center space-x-1.5 bg-slate-950/60 p-1 rounded-lg border border-slate-800">
+      <button onclick="goToSlide(0)" class="nav-pill px-2.5 py-1 rounded text-slate-400 hover:text-white transition" data-slide="0">全景</button>
+      <button onclick="goToSlide(1)" class="nav-pill px-2.5 py-1 rounded text-slate-400 hover:text-white transition" data-slide="1">地圖</button>
+      <button onclick="goToSlide(2)" class="nav-pill px-2.5 py-1 rounded text-slate-400 hover:text-white transition" data-slide="2">Ch 8 應收</button>
+      <button onclick="goToSlide(3)" class="nav-pill px-2.5 py-1 rounded text-slate-400 hover:text-white transition" data-slide="3">Ch 9 資產</button>
+      <button onclick="goToSlide(4)" class="nav-pill px-2.5 py-1 rounded text-slate-400 hover:text-white transition" data-slide="4">Ch 10 負債</button>
+      <button onclick="goToSlide(5)" class="nav-pill px-2.5 py-1 rounded text-slate-400 hover:text-white transition" data-slide="5">Ch 12 權益</button>
+      <button onclick="goToSlide(6)" class="nav-pill px-2.5 py-1 rounded text-slate-400 hover:text-white transition" data-slide="6">Ch 13 投資</button>
+      <button onclick="goToSlide(7)" class="nav-pill px-2.5 py-1 rounded text-slate-400 hover:text-white transition" data-slide="7">跨表勾稽</button>
+      <button onclick="goToSlide(8)" class="nav-pill px-2.5 py-1 rounded text-slate-400 hover:text-white transition" data-slide="8">心法</button>
+    </div>
+
+    <div class="flex items-center space-x-3 text-slate-400">
+      <button onclick="toggleFullScreen()" class="hover:text-white p-1 rounded hover:bg-slate-800 transition" title="全螢幕模式 (F)">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/></svg>
+      </button>
+      <span id="slideIndicator" class="font-mono text-blue-400 font-medium">01 / 09</span>
+    </div>
+  </header>
+
+  <!-- 頂部進度條線 -->
+  <div class="w-full bg-slate-800 h-1 z-20">
+    <div id="progressBar" class="bg-gradient-to-r from-blue-500 via-indigo-500 to-emerald-400 h-1 transition-all duration-300" style="width: 11.11%;"></div>
+  </div>
+
+  <!-- 投影片內容容器 (主舞臺) -->
+  <main class="flex-1 flex items-center justify-center p-4 md:p-8 relative overflow-y-auto">
+
+    <!-- ==================== SLIDE 1: 封面 ==================== -->
+    <section class="slide active flex-col items-center justify-center max-w-5xl w-full text-center space-y-6 py-6" id="slide-0">
+      <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full badge-subtle text-xs tracking-wider uppercase font-semibold">
+        <span>企業管理學系會計學 (初會二) 核心全覽</span>
+      </div>
+      
+      <div class="grid md:grid-cols-12 gap-8 items-center text-left bg-slate-900/70 border border-slate-800 rounded-2xl p-8 shadow-2xl backdrop-blur">
+        <div class="md:col-span-7 space-y-5">
+          <h1 class="text-3xl md:text-5xl font-black tracking-tight text-white leading-tight">
+            數字背後的<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-emerald-400">營運實質與管理決策</span>
+          </h1>
+          <p class="text-slate-300 text-sm md:text-base leading-relaxed">
+            初會二涵蓋資產深化（應收、固定、投資）、流動負債準備與公司權益交易。企管系學會計，不僅要精通借貸平衡與 IFRS 準則，更要洞察報表勾稽、現金流品質與盈餘操縱防杜。
+          </p>
+          <div class="pt-2 flex flex-wrap gap-2 text-xs">
+            <span class="px-2.5 py-1 bg-slate-800 text-slate-300 rounded border border-slate-700">Ch 8 應收帳款與票據</span>
+            <span class="px-2.5 py-1 bg-slate-800 text-slate-300 rounded border border-slate-700">Ch 9 固定與無形資產</span>
+            <span class="px-2.5 py-1 bg-slate-800 text-slate-300 rounded border border-slate-700">Ch 10 流動負債與準備</span>
+            <span class="px-2.5 py-1 bg-slate-800 text-slate-300 rounded border border-slate-700">Ch 12 公司權益與股利</span>
+            <span class="px-2.5 py-1 bg-slate-800 text-slate-300 rounded border border-slate-700">Ch 13 金融資產投資</span>
+          </div>
+        </div>
+        <div class="md:col-span-5 flex justify-center">
+          <div class="relative group">
+            <div class="absolute -inset-1 bg-gradient-to-r from-blue-600 to-emerald-600 rounded-2xl blur opacity-30 group-hover:opacity-60 transition duration-500"></div>
+            <img src="../../assets/istockphoto-1482686055-1024x1024.jpg" 
+                 alt="Accounting and Management" 
+                 class="relative rounded-xl w-full h-64 object-cover shadow-2xl border border-slate-700"
+                 onerror="this.src='https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800';">
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-center space-x-6 text-xs text-slate-400 pt-2">
+        <span class="flex items-center space-x-1.5"><kbd class="px-2 py-0.5 bg-slate-800 border border-slate-700 rounded text-slate-300">Space</kbd> 或 <kbd class="px-2 py-0.5 bg-slate-800 border border-slate-700 rounded text-slate-300">→</kbd> 下一頁</span>
+        <span class="flex items-center space-x-1.5"><kbd class="px-2 py-0.5 bg-slate-800 border border-slate-700 rounded text-slate-300">←</kbd> 上一頁</span>
+        <span class="flex items-center space-x-1.5"><kbd class="px-2 py-0.5 bg-slate-800 border border-slate-700 rounded text-slate-300">F</kbd> 全螢幕</span>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 2: 全景地圖 ==================== -->
+    <section class="slide flex-col max-w-5xl w-full space-y-6" id="slide-1">
+      <div class="border-b border-slate-800 pb-3 flex justify-between items-end">
+        <div>
+          <span class="text-blue-400 text-xs font-semibold tracking-wider uppercase">Architecture & Big Picture</span>
+          <h2 class="text-2xl md:text-3xl font-bold text-white mt-1">資產負債表與企管營運循環地圖</h2>
+        </div>
+        <span class="text-slate-400 text-xs hidden sm:block">會計恆等式：$\text{Assets} = \text{Liabilities} + \text{Equity}$</span>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-5">
+        <!-- 資產方 -->
+        <div class="bg-slate-900/90 border border-blue-900/40 rounded-xl p-5 space-y-4 shadow-lg hover:border-blue-500/50 transition">
+          <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
+            <h3 class="font-bold text-blue-400 flex items-center space-x-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
+              <span>資產側 (Assets)</span>
+            </h3>
+            <span class="text-[10px] text-slate-400 bg-slate-800 px-2 py-0.5 rounded">資金之運用與產能</span>
+          </div>
+          <ul class="space-y-3 text-xs text-slate-300">
+            <li class="bg-slate-950/60 p-2.5 rounded border border-slate-850">
+              <strong class="text-white block font-medium">Ch 8 應收帳款與票據</strong>
+              <span>信用賒銷管理、備抵損失提列、淨變現價值 (NRV)、帳款週轉天數 (DSO)。</span>
+            </li>
+            <li class="bg-slate-950/60 p-2.5 rounded border border-slate-850">
+              <strong class="text-white block font-medium">Ch 9 固定與無形資產</strong>
+              <span>長期產能建置 (CapEx)、三大折舊法、天然資源折耗、研發技術可行性分水嶺。</span>
+            </li>
+            <li class="bg-slate-950/60 p-2.5 rounded border border-slate-850">
+              <strong class="text-white block font-medium">Ch 13 金融資產投資</strong>
+              <span>閒置資金配置、債券三分類 (AC/FVOCI/FVPL)、權益法 (20%~50%) 戰略結盟。</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- 負債方 -->
+        <div class="bg-slate-900/90 border border-indigo-900/40 rounded-xl p-5 space-y-4 shadow-lg hover:border-indigo-500/50 transition">
+          <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
+            <h3 class="font-bold text-indigo-400 flex items-center space-x-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-indigo-500"></span>
+              <span>負債側 (Liabilities)</span>
+            </h3>
+            <span class="text-[10px] text-slate-400 bg-slate-800 px-2 py-0.5 rounded">外部債權人之融資</span>
+          </div>
+          <ul class="space-y-3 text-xs text-slate-300">
+            <li class="bg-slate-950/60 p-2.5 rounded border border-slate-850">
+              <strong class="text-white block font-medium">Ch 10 流動負債與準備</strong>
+              <span>商業信用 (應付帳款)、營業稅代收代繳受託人本質、預收收入商模、短期償債力。</span>
+            </li>
+            <li class="bg-slate-950/60 p-2.5 rounded border border-slate-850">
+              <strong class="text-white block font-medium">IAS 37 負債準備 (Provisions)</strong>
+              <span>現時義務、很有可能 (>50%)、金額可靠估計；產品保固跨期核算與餅乾罐防杜。</span>
+            </li>
+            <li class="bg-slate-950/60 p-2.5 rounded border border-slate-850">
+              <strong class="text-white block font-medium">Ch 11 非流動負債 (前瞻)</strong>
+              <span>應付公司債折溢價攤銷 (有效利率法)、長期財務槓桿與利息保障倍數。</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- 權益方 -->
+        <div class="bg-slate-900/90 border border-emerald-900/40 rounded-xl p-5 space-y-4 shadow-lg hover:border-emerald-500/50 transition">
+          <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
+            <h3 class="font-bold text-emerald-400 flex items-center space-x-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+              <span>權益側 (Equity)</span>
+            </h3>
+            <span class="text-[10px] text-slate-400 bg-slate-800 px-2 py-0.5 rounded">股東永久出資與盈餘</span>
+          </div>
+          <ul class="space-y-3 text-xs text-slate-300">
+            <li class="bg-slate-950/60 p-2.5 rounded border border-slate-850">
+              <strong class="text-white block font-medium">Ch 12 公司組織與股本交易</strong>
+              <span>普通股/特別股發行、庫藏股成本法 (權益扣減科目)、股權結構與表決權。</span>
+            </li>
+            <li class="bg-slate-950/60 p-2.5 rounded border border-slate-850">
+              <strong class="text-white block font-medium">股利分配三部曲與股票分割</strong>
+              <span>現金股利 (真實流出) vs 股票股利 (盈餘轉增資) vs 股票分割 (無分錄)。</span>
+            </li>
+            <li class="bg-slate-950/60 p-2.5 rounded border border-slate-850">
+              <strong class="text-white block font-medium">普通股東權益報酬率 (ROE)</strong>
+              <span>杜邦分析三因子拆解：獲利能力 $\times$ 資產週轉 $\times$ 財務槓桿。</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-r from-blue-950/60 to-emerald-950/60 border border-slate-850 p-3 rounded-xl flex items-center justify-between text-xs text-slate-300">
+        <span class="flex items-center space-x-2">
+          <span class="text-emerald-400 font-bold">💡 終極收斂點：</span>
+          <span>所有資產與負債項目的期末變動，最終都在 **Chapter 14 現金流量表** 的間接法中化為實質營運現金流。</span>
+        </span>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 3: Chapter 8 ==================== -->
+    <section class="slide flex-col max-w-5xl w-full space-y-5" id="slide-2">
+      <div class="border-b border-slate-800 pb-2.5 flex justify-between items-end">
+        <div>
+          <span class="text-blue-400 text-xs font-semibold tracking-wider uppercase">Chapter 8 Focus</span>
+          <h2 class="text-2xl font-bold text-white mt-1">應收帳款評價、備抵法與票據計息</h2>
+        </div>
+        <span class="text-xs bg-blue-900/50 text-blue-300 border border-blue-700/50 px-2.5 py-0.5 rounded-full">Weygandt LO1 ~ LO4</span>
+      </div>
+
+      <div class="grid md:grid-cols-12 gap-5">
+        <!-- 左欄：核心會計分錄三階段與 NRV 證明 -->
+        <div class="md:col-span-7 bg-slate-900/90 border border-slate-800 rounded-xl p-4 space-y-3.5 text-xs">
+          <h3 class="font-bold text-slate-200 border-b border-slate-800 pb-2 flex justify-between items-center">
+            <span>備抵法三階段分錄 (Allowance Method)</span>
+            <span class="text-[10px] text-amber-400">IFRS 強制採用（禁直接沖銷法）</span>
+          </h3>
+
+          <div class="space-y-2.5 font-mono text-[11px]">
+            <div class="bg-slate-950 p-2.5 rounded border border-slate-800">
+              <span class="text-slate-400 block text-[10px]">階段一：期末估計提列 (壞帳費用)</span>
+              <span class="text-blue-300">借：預期信用減損損失 (Bad Debt Expense)</span> <span class="float-right">$12,000</span><br>
+              <span class="text-emerald-400 pl-4">貸：備抵損失 (Allowance for Doubtful Accounts)</span> <span class="float-right">$12,000</span>
+            </div>
+
+            <div class="bg-slate-950 p-2.5 rounded border border-slate-800">
+              <span class="text-slate-400 block text-[10px]">階段二：實際壞帳沖銷 (Write-Off)</span>
+              <span class="text-blue-300">借：備抵損失 (Allowance for Doubtful Accounts)</span> <span class="float-right">$500</span><br>
+              <span class="text-emerald-400 pl-4">貸：應收帳款－特定客戶 (Accounts Receivable)</span> <span class="float-right">$500</span>
+            </div>
+
+            <div class="bg-slate-950 p-2.5 rounded border border-slate-800">
+              <span class="text-slate-400 block text-[10px]">階段三：沖銷後意外收回 (Recovery of Account)</span>
+              <span class="text-slate-300">1. 回復債權：借 應收帳款 $500 / 貸 備抵損失 $500</span><br>
+              <span class="text-slate-300">2. 正常收現：借 現金 $500 / 貸 應收帳款 $500</span>
+            </div>
+          </div>
+
+          <div class="bg-blue-950/40 border border-blue-900/60 p-2.5 rounded text-[11px] text-blue-200">
+            <strong>🎯 淨變現價值 (NRV) 恆等式證明：</strong><br>
+            沖銷前：AR $200,000 - 備抵 $12,000 = <span class="text-amber-300 font-bold">$188,000</span><br>
+            沖銷後：AR $199,500 - 備抵 $11,500 = <span class="text-amber-300 font-bold">$188,000</span> (NRV 完全不變！)
+          </div>
+        </div>
+
+        <!-- 右欄：帳齡分析、票據與 Nike vs Adidas 案例 -->
+        <div class="md:col-span-5 space-y-4">
+          <!-- 帳齡分析調整兩步驟 -->
+          <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-4 text-xs space-y-2">
+            <h4 class="font-bold text-white flex items-center space-x-1.5">
+              <span>帳齡分析兩步驟法則 (Aging Schedule)</span>
+            </h4>
+            <p class="text-slate-300 text-[11px]">
+              <strong>Step 1:</strong> 依逾期天數各級違約率加總算出期末「應有貸方餘額 (Target Balance)」。<br>
+              <strong>Step 2:</strong> 比較期末調整前餘額，倒擠本期調整金額：
+              $$\text{本期調整額} = \text{目標貸餘} - \text{調整前貸餘 (或 } + \text{調整前借餘)}$$
+            </p>
+          </div>
+
+          <!-- 實戰 PK：Nike vs. Adidas (Class Exercise 3) -->
+          <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-4 text-xs space-y-2.5">
+            <div class="flex justify-between items-center border-b border-slate-800 pb-1.5">
+              <span class="font-bold text-emerald-400">實戰 PK：Nike vs. Adidas</span>
+              <span class="text-[10px] text-slate-400">Class Exercise 3</span>
+            </div>
+            <div class="grid grid-cols-2 gap-2 text-center text-[11px]">
+              <div class="bg-slate-950 p-2 rounded border border-slate-800">
+                <span class="text-slate-400 block">Nike (USA)</span>
+                <span class="text-white font-bold block text-sm mt-0.5">5.0 次 / 73 天</span>
+                <span class="text-[9px] text-rose-400">收現天數過長</span>
+              </div>
+              <div class="bg-slate-950 p-2 rounded border border-slate-800">
+                <span class="text-slate-400 block">Adidas (DEU)</span>
+                <span class="text-white font-bold block text-sm mt-0.5">8.0 次 / 46 天</span>
+                <span class="text-[9px] text-emerald-400">週轉更快、變現更佳</span>
+              </div>
+            </div>
+            <p class="text-[10px] text-slate-400 leading-normal">
+              <strong>企管解讀：</strong>Adidas 每年將帳款週轉 8 次，資金被客戶佔用時間少 27 天，流動性顯著優於 Nike。
+            </p>
+          </div>
+
+          <!-- 應收票據利息公式 -->
+          <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-3 text-[11px] text-slate-300 flex items-center justify-between">
+            <span><strong>票據利息：</strong> $\text{Face Value} \times \text{Rate} \times \frac{\text{Days}}{360}$</span>
+            <span class="text-[10px] bg-slate-800 text-slate-400 px-2 py-0.5 rounded">算尾不算頭</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 4: Chapter 9 ==================== -->
+    <section class="slide flex-col max-w-5xl w-full space-y-5" id="slide-3">
+      <div class="border-b border-slate-800 pb-2.5 flex justify-between items-end">
+        <div>
+          <span class="text-blue-400 text-xs font-semibold tracking-wider uppercase">Chapter 9 Focus</span>
+          <h2 class="text-2xl font-bold text-white mt-1">不動產廠房設備、折舊方法與無形資產</h2>
+        </div>
+        <span class="text-xs bg-indigo-900/50 text-indigo-300 border border-indigo-700/50 px-2.5 py-0.5 rounded-full">Weygandt LO1 ~ LO4</span>
+      </div>
+
+      <div class="grid md:grid-cols-12 gap-5 text-xs">
+        <!-- 左欄：三大折舊法與比較 -->
+        <div class="md:col-span-7 bg-slate-900/90 border border-slate-800 rounded-xl p-4 space-y-3">
+          <h3 class="font-bold text-white border-b border-slate-800 pb-2 flex justify-between">
+            <span>三大折舊計算法全覽 (Depreciation Methods)</span>
+            <span class="text-[10px] text-slate-400">折舊為成本分攤，非資產評價</span>
+          </h3>
+
+          <div class="space-y-2">
+            <div class="bg-slate-950 p-2.5 rounded border border-slate-800">
+              <span class="font-semibold text-blue-400 block">1. 直線法 (Straight-Line) — 隨時間均等遞減</span>
+              <span class="text-slate-300">$$\text{年折舊} = \frac{\text{成本} - \text{殘值}}{\text{耐用年數}} \quad (\text{期中購入按實際月數破月折算})$$</span>
+            </div>
+
+            <div class="bg-slate-950 p-2.5 rounded border border-slate-800">
+              <span class="font-semibold text-indigo-400 block">2. 生產數量法 (Units-of-Activity) — 隨產出量連動</span>
+              <span class="text-slate-300">$$\text{單位折舊} = \frac{\text{成本} - \text{殘值}}{\text{總估計產量或里程}}, \quad \text{折舊} = \text{當期產量} \times \text{單位折舊}$$</span>
+            </div>
+
+            <div class="bg-slate-950 p-2.5 rounded border border-slate-800">
+              <span class="font-semibold text-emerald-400 block">3. 倍數餘額遞減法 (Double-Declining-Balance) — 加速折舊</span>
+              <span class="text-slate-300">$$\text{折舊率} = \frac{2}{\text{耐用年數}}, \quad \text{年折舊} = \text{期初帳面價值 (忽略殘值)} \times \text{折舊率}$$</span>
+              <span class="text-[10px] text-slate-400 block mt-1">*最後一年倒擠：當帳面價值降至預估殘值時停止提列。前期認列高折舊產生最佳「所得稅盾 (Tax Shield)」！</span>
+            </div>
+          </div>
+
+          <div class="bg-slate-950 p-2.5 rounded border border-slate-800 text-[11px] text-slate-300">
+            <strong>IFRS 組成份子折舊 (Component Depreciation)：</strong><br>
+            若建築物之主體結構 (40年)、HVAC 空調 (5年)、地板工程 (10年) 具不同年限，**必須分別單獨提列折舊**！
+          </div>
+        </div>
+
+        <!-- 右欄：研發費用分水嶺、無形資產與天然資源 -->
+        <div class="md:col-span-5 space-y-3.5">
+          <!-- R&D 分水嶺 -->
+          <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-4 space-y-2">
+            <h4 class="font-bold text-amber-400 flex items-center justify-between">
+              <span>研發支出 (R&D) 資本化分水嶺</span>
+              <span class="text-[10px] text-slate-400">IFRS 準則</span>
+            </h4>
+            <div class="space-y-1.5 text-[11px]">
+              <div class="bg-slate-950 p-2 rounded border-l-2 border-rose-500">
+                <strong class="text-rose-300">研究階段 (Research Phase)：</strong>
+                <span class="text-slate-400 block">探索新材料、技術 $\implies$ **100% 費用化**</span>
+              </div>
+              <div class="bg-slate-950 p-2 rounded border-l-2 border-emerald-500">
+                <strong class="text-emerald-300">開發階段 (Development Phase)：</strong>
+                <span class="text-slate-400 block">
+                  • 技術可行性前 $\implies$ 費用化<br>
+                  • **技術可行性達成後** $\implies$ **資本化為無形資產！**
+                </span>
+              </div>
+            </div>
+            <span class="text-[10px] text-slate-400 block">廣告行銷與球星代言支出：無論效益多大，**一律當期費用化**。</span>
+          </div>
+
+          <!-- 無形資產與天然資源 -->
+          <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-3.5 space-y-2 text-[11px]">
+            <h4 class="font-bold text-white">無形資產攤銷 vs. 減損規則</h4>
+            <ul class="space-y-1.5 text-slate-300 text-[10px]">
+              <li>• **有限年限 (專利、版權、特許權)**：法定年限與經濟年限取短者直線攤銷。</li>
+              <li>• **非確定年限 (商譽 Goodwill、商標權)**：**不攤銷**，每年定期進行強制減損測試。</li>
+              <li>• **天然資源折耗 (Depletion)**：開採時借記**「存貨」**而非費用！售出時才轉銷貨成本。</li>
+            </ul>
+          </div>
+
+          <!-- 資產週轉率 -->
+          <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-3 text-[11px] flex justify-between items-center text-slate-300">
+            <span><strong>資產週轉率：</strong> $\frac{\text{Net Sales}}{\text{Average Total Assets}}$</span>
+            <span class="text-[10px] text-slate-400">衡量每元資產產出營收效率</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 5: Chapter 10 ==================== -->
+    <section class="slide flex-col max-w-5xl w-full space-y-5" id="slide-4">
+      <div class="border-b border-slate-800 pb-2.5 flex justify-between items-end">
+        <div>
+          <span class="text-blue-400 text-xs font-semibold tracking-wider uppercase">Chapter 10 Focus</span>
+          <h2 class="text-2xl font-bold text-white mt-1">流動負債、IAS 37 負債準備與流動性分析</h2>
+        </div>
+        <span class="text-xs bg-purple-900/50 text-purple-300 border border-purple-700/50 px-2.5 py-0.5 rounded-full">Weygandt LO1 ~ LO3</span>
+      </div>
+
+      <div class="grid md:grid-cols-12 gap-5 text-xs">
+        <!-- 左欄：確定負債與負債準備三大要件 -->
+        <div class="md:col-span-7 bg-slate-900/90 border border-slate-800 rounded-xl p-4 space-y-3.5">
+          <h3 class="font-bold text-white border-b border-slate-800 pb-2 flex justify-between items-center">
+            <span>確定流動負債 vs. IAS 37 負債準備</span>
+            <span class="text-[10px] text-purple-400">時間或金額具不確定性</span>
+          </h3>
+
+          <div class="grid grid-cols-2 gap-2 text-[11px]">
+            <div class="bg-slate-950 p-2.5 rounded border border-slate-800 space-y-1">
+              <strong class="text-blue-400 block font-semibold">營業稅代收代繳受託人</strong>
+              <p class="text-slate-400 text-[10px]">
+                營業稅是代政府向消費者徵收，**絕對不是賣方的費用**！收現時貸記「應付營業稅」。
+              </p>
+            </div>
+            <div class="bg-slate-950 p-2.5 rounded border border-slate-800 space-y-1">
+              <strong class="text-emerald-400 block font-semibold">預收收入優質商模</strong>
+              <p class="text-slate-400 text-[10px]">
+                服務未履行前先收現，列為流動負債。為企業創造零資金成本的高質量營運現金流。
+              </p>
+            </div>
+          </div>
+
+          <!-- IAS 37 負債準備三大要件 -->
+          <div class="bg-slate-950 p-3 rounded-lg border border-purple-900/40 space-y-2">
+            <span class="font-bold text-purple-300 block text-xs">IAS 37 負債準備法定認列三要件 (須同時具備)：</span>
+            <div class="grid grid-cols-3 gap-2 text-center text-[10px]">
+              <div class="bg-slate-900 p-2 rounded border border-slate-800">
+                <span class="text-slate-400 block">條件 1</span>
+                <strong class="text-white">過去事項之<br>現時義務</strong>
+              </div>
+              <div class="bg-slate-900 p-2 rounded border border-slate-800">
+                <span class="text-slate-400 block">條件 2</span>
+                <strong class="text-white">很有可能流出<br>(Probable > 50%)</strong>
+              </div>
+              <div class="bg-slate-900 p-2 rounded border border-slate-800">
+                <span class="text-slate-400 block">條件 3</span>
+                <strong class="text-white">金額能夠<br>可靠估計</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- 保固推導公式 -->
+          <div class="bg-slate-950 p-2.5 rounded border border-slate-800 text-[11px] text-slate-300">
+            <strong>產品保固跨期核算 (Ting Mfg 案例)：</strong><br>
+            期末估計保固負債 $= (\text{總銷量} \times \text{瑕疵率} - \text{當年已修數}) \times \text{單位維修成本}$<br>
+            次年客戶送修時，**直接借記「負債準備－產品保固」**，不再認列費用！
+          </div>
+        </div>
+
+        <!-- 右欄：流動比率與期末美化報表手法破解 -->
+        <div class="md:col-span-5 space-y-3.5">
+          <!-- 償債比率庫 -->
+          <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-4 space-y-2">
+            <h4 class="font-bold text-white flex justify-between">
+              <span>短期償債能力核心指標</span>
+              <span class="text-[10px] text-slate-400">Chen Group 題解</span>
+            </h4>
+            <div class="space-y-1.5 text-[11px] text-slate-300">
+              <p>• **營運資金** $= \text{Current Assets} - \text{Current Liabilities} = \mathbf{¥140,000}$</p>
+              <p>• **流動比率** $= \frac{\text{Current Assets}}{\text{Current Liabilities}} = \frac{¥210,000}{¥70,000} = \mathbf{3.0 \text{ 倍}}$</p>
+              <p>• **速動比率** $= \frac{\text{現金} + \text{短期投資} + \text{應收款淨額}}{\text{流動負債}}$ (剔除存貨與預付費用)</p>
+            </div>
+          </div>
+
+          <!-- 期末報表粉飾伎倆破解 -->
+          <div class="bg-slate-900/90 border border-rose-900/40 rounded-xl p-4 space-y-2 text-rose-200">
+            <h4 class="font-bold text-rose-400 flex items-center space-x-1.5">
+              <span>⚠️ 破解期末「美化報表 (Window Dressing)」</span>
+            </h4>
+            <p class="text-[11px] text-slate-300 leading-relaxed">
+              當企業原流動比率 > 1.0 (例如 $CA=200, CL=100 \implies CR=2.0$)：<br>
+              經理人在 12/31 刻意<strong>動用現金 $50 清償應付帳款 $50</strong>：
+            </p>
+            <div class="bg-slate-950 p-2 rounded text-center text-xs font-mono font-bold text-amber-300">
+              新流動比率 = (200 - 50) / (100 - 50) = 150 / 50 = 3.0 倍！
+            </div>
+            <p class="text-[10px] text-slate-400">
+              <strong>審計與企管洞察：</strong>實質營運資金完全沒變 ($100)，但流動比率卻虛增至 3.0 倍！經理人常用此手法向銀行騙取寬鬆借款條件。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 6: Chapter 12 ==================== -->
+    <section class="slide flex-col max-w-5xl w-full space-y-5" id="slide-5">
+      <div class="border-b border-slate-800 pb-2.5 flex justify-between items-end">
+        <div>
+          <span class="text-blue-400 text-xs font-semibold tracking-wider uppercase">Chapter 12 Focus</span>
+          <h2 class="text-2xl font-bold text-white mt-1">公司權益、庫藏股交易與股利決策</h2>
+        </div>
+        <span class="text-xs bg-emerald-900/50 text-emerald-300 border border-emerald-700/50 px-2.5 py-0.5 rounded-full">Weygandt LO1 ~ LO5</span>
+      </div>
+
+      <div class="grid md:grid-cols-12 gap-5 text-xs">
+        <!-- 左欄：庫藏股成本法與股利三日期 -->
+        <div class="md:col-span-7 bg-slate-900/90 border border-slate-800 rounded-xl p-4 space-y-3.5">
+          <h3 class="font-bold text-white border-b border-slate-800 pb-2 flex justify-between items-center">
+            <span>庫藏股成本法 (Treasury Shares)</span>
+            <span class="text-[10px] text-emerald-400">權益扣減科目 (Contra-Equity)</span>
+          </h3>
+
+          <div class="space-y-2 font-mono text-[11px]">
+            <div class="bg-slate-950 p-2 rounded border border-slate-800">
+              <span class="text-slate-400 block text-[10px]">1. 買回自家股份 (按成本借記權益減項)</span>
+              <span class="text-rose-300">借：庫藏股 (Treasury Shares)</span> <span class="float-right">$320,000</span><br>
+              <span class="text-slate-300 pl-4">貸：現金 (Cash)</span> <span class="float-right">$320,000</span>
+            </div>
+            <div class="bg-slate-950 p-2 rounded border border-slate-800">
+              <span class="text-slate-400 block text-[10px]">2. 高於成本再出售 (差額貸記資本公積)</span>
+              <span class="text-slate-300">借：現金 $100,000 / 貸：庫藏股 $80,000 + 資本公積－庫藏股 $20,000</span>
+            </div>
+            <div class="bg-slate-950 p-2 rounded border border-slate-800">
+              <span class="text-slate-400 block text-[10px]">3. 低於成本再出售 (依序沖抵：資本公積 $\to$ 保留盈餘)</span>
+              <span class="text-slate-300">借：現金 + 借：資本公積 (不足部分沖借保留盈餘！) / 貸：庫藏股</span>
+            </div>
+          </div>
+
+          <div class="bg-slate-950 p-2.5 rounded border border-slate-800 text-[11px] text-slate-300 space-y-1">
+            <strong class="text-white block">現金股利三個關鍵日期：</strong>
+            <p class="text-[10px] text-slate-400">
+              1. **宣告日 (Declaration)**：正式產生法定流動負債 (應付股利)！<br>
+              2. **除息基準日 (Record)**：停止過戶造冊，**不作任何會計分錄**！<br>
+              3. **發放日 (Payment)**：以現金清償應付股利負債。
+            </p>
+          </div>
+        </div>
+
+        <!-- 右欄：股利 vs 股票分割矩陣 & ROE 杜邦分析 -->
+        <div class="md:col-span-5 space-y-3.5">
+          <!-- 方案對比矩陣 (Lucerne 案例) -->
+          <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-3.5 space-y-2">
+            <h4 class="font-bold text-white flex justify-between">
+              <span>四方案影響對比 (Lucerne AG)</span>
+              <span class="text-[10px] text-slate-400">Class Exercise 1</span>
+            </h4>
+            <div class="overflow-x-auto">
+              <table class="w-full text-[10px] text-center border-collapse">
+                <thead>
+                  <tr class="bg-slate-950 text-slate-400 border-b border-slate-800">
+                    <th class="p-1 text-left">項目</th>
+                    <th class="p-1">股票股利</th>
+                    <th class="p-1">現金股利</th>
+                    <th class="p-1">2:1 分割</th>
+                  </tr>
+                </thead>
+                <tbody class="text-slate-300">
+                  <tr class="border-b border-slate-850">
+                    <td class="p-1 text-left">保留盈餘</td>
+                    <td class="text-rose-400">減少 (D)</td>
+                    <td class="text-rose-400">減少 (D)</td>
+                    <td class="text-slate-500">不變 (NC)</td>
+                  </tr>
+                  <tr class="border-b border-slate-850">
+                    <td class="p-1 text-left">股本總額</td>
+                    <td class="text-emerald-400">增加 (I)</td>
+                    <td class="text-slate-500">不變 (NC)</td>
+                    <td class="text-slate-500">不變 (NC)</td>
+                  </tr>
+                  <tr class="border-b border-slate-850">
+                    <td class="p-1 text-left">每股面額</td>
+                    <td class="text-slate-500">不變 (NC)</td>
+                    <td class="text-slate-500">不變 (NC)</td>
+                    <td class="text-rose-400">減半 (D)</td>
+                  </tr>
+                  <tr class="border-b border-slate-850">
+                    <td class="p-1 text-left">流通股數</td>
+                    <td class="text-emerald-400">增加 (I)</td>
+                    <td class="text-slate-500">不變 (NC)</td>
+                    <td class="text-emerald-400">加倍 (I)</td>
+                  </tr>
+                  <tr>
+                    <td class="p-1 text-left font-bold text-white">股東總權益</td>
+                    <td class="text-emerald-400 font-bold">不變 (NC)</td>
+                    <td class="text-rose-400 font-bold">減少 (D)</td>
+                    <td class="text-emerald-400 font-bold">不變 (NC)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- ROE 杜邦分析拆解 -->
+          <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-3.5 space-y-1.5">
+            <h4 class="font-bold text-emerald-400 text-xs">ROE 杜邦分析終極三分解</h4>
+            <div class="text-[10px] text-slate-300 font-mono">
+              $$\text{ROE} = \underbrace{\frac{\text{Net Income}}{\text{Sales}}}_{\text{純益率}} \times \underbrace{\frac{\text{Sales}}{\text{Assets}}}_{\text{資產週轉率}} \times \underbrace{\frac{\text{Assets}}{\text{Equity}}}_{\text{財務槓桿}}$$
+            </div>
+            <p class="text-[9px] text-slate-400">
+              <strong>警惕高槓桿陷阱：</strong>靠膨脹負債（權益乘數）拉高 ROE 的企業，一旦景氣衰退極易引發債務崩塌。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 7: Chapter 13 ==================== -->
+    <section class="slide flex-col max-w-5xl w-full space-y-5" id="slide-6">
+      <div class="border-b border-slate-800 pb-2.5 flex justify-between items-end">
+        <div>
+          <span class="text-blue-400 text-xs font-semibold tracking-wider uppercase">Chapter 13 Focus</span>
+          <h2 class="text-2xl font-bold text-white mt-1">金融資產投資、IFRS 9 與權益法機制</h2>
+        </div>
+        <span class="text-xs bg-cyan-900/50 text-cyan-300 border border-cyan-700/50 px-2.5 py-0.5 rounded-full">Weygandt LO1 ~ LO3</span>
+      </div>
+
+      <div class="grid md:grid-cols-12 gap-5 text-xs">
+        <!-- 左欄：IFRS 9 分類與處分重分類差異 -->
+        <div class="md:col-span-6 bg-slate-900/90 border border-slate-800 rounded-xl p-4 space-y-3.5">
+          <h3 class="font-bold text-white border-b border-slate-800 pb-2 flex justify-between">
+            <span>IFRS 9 債券 vs. 股票評價原則</span>
+            <span class="text-[10px] text-cyan-400">重分類禁令</span>
+          </h3>
+
+          <div class="space-y-2 text-[11px]">
+            <div class="bg-slate-950 p-2.5 rounded border border-slate-800">
+              <strong class="text-blue-400 block font-semibold">債券 FVTOCI (收取利息與出售)</strong>
+              <span class="text-slate-300 text-[10px]">
+                • 平時市價評價差額計入 OCI (AOCI 權益)。<br>
+                • <strong>處分時：✅ 允許重分類 (Recycling)！</strong>先前累積於 AOCI 之損益轉入當期損益表「處分利益」。
+              </span>
+            </div>
+
+            <div class="bg-slate-950 p-2.5 rounded border border-slate-800 border-l-2 border-rose-500">
+              <strong class="text-rose-400 block font-semibold">股票 FVTOCI (策略性非交易指定)</strong>
+              <span class="text-slate-300 text-[10px]">
+                • 平時市價評價差額計入 OCI (AOCI 權益)。<br>
+                • <strong>處分時：❌ 嚴禁重分類 (No Recycling)！</strong>全數差額直接結轉「保留盈餘」，絕對不能碰損益表！(防範 Cherry-Picking 操縱淨利)。
+              </span>
+            </div>
+
+            <div class="bg-slate-950 p-2.5 rounded border border-slate-800">
+              <strong class="text-amber-400 block font-semibold">股票 FVTPL (交易目的 / 預設)</strong>
+              <span class="text-slate-300 text-[10px]">
+                • 平時市價波動直接進損益表 (P&L)，淨利劇烈起伏。
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 右欄：權益法 (20%~50%) 與 Control Alt Design 雙軌題解 -->
+        <div class="md:col-span-6 bg-slate-900/90 border border-slate-800 rounded-xl p-4 space-y-3.5">
+          <h3 class="font-bold text-white border-b border-slate-800 pb-2 flex justify-between">
+            <span>權益法 vs. 公允價值法雙軌對照</span>
+            <span class="text-[10px] text-slate-400">Class Exercise 1 (P13.4)</span>
+          </h3>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-[10px] border-collapse">
+              <thead>
+                <tr class="bg-slate-950 text-slate-400 border-b border-slate-800">
+                  <th class="p-1.5 text-left">事項</th>
+                  <th class="p-1.5 text-left">公允價值法 (FVPL)</th>
+                  <th class="p-1.5 text-left text-emerald-400">權益法 (Equity Method)</th>
+                </tr>
+              </thead>
+              <tbody class="text-slate-300">
+                <tr class="border-b border-slate-850">
+                  <td class="p-1.5 text-slate-400 font-medium">收到現金股利</td>
+                  <td class="p-1.5">認列「股利收入」+£54k</td>
+                  <td class="p-1.5 text-emerald-300 font-bold">沖減「投資帳面值」-£54k (資產收回，非收入！)</td>
+                </tr>
+                <tr class="border-b border-slate-850">
+                  <td class="p-1.5 text-slate-400 font-medium">被投資公司獲利</td>
+                  <td class="p-1.5 text-slate-500">❌ 不作分錄</td>
+                  <td class="p-1.5 text-emerald-300 font-bold">按 30% 認列「投資收益」+£96k 並墊高投資成本</td>
+                </tr>
+                <tr class="border-b border-slate-850">
+                  <td class="p-1.5 text-slate-400 font-medium">期末市價大漲</td>
+                  <td class="p-1.5">認列「評價利益」+£280k</td>
+                  <td class="p-1.5 text-slate-500">❌ 不作分錄 (無視股市短線波動)</td>
+                </tr>
+                <tr>
+                  <td class="p-1.5 text-white font-bold">損益表總貢獻</td>
+                  <td class="p-1.5 font-bold text-amber-300">+£334,000 (市價驅動)</td>
+                  <td class="p-1.5 font-bold text-emerald-400">+£96,000 (實質本業獲利)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="bg-slate-950 p-2 rounded text-[10px] text-slate-400">
+            <strong>企管警訊：</strong>持股 > 50% 須編製合併報表；權益法 (20%~50%) 資產負債表僅列示一行淨值，關聯企業的龐大借款<strong>完全屬於表外負債</strong>。
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 8: 跨章節收斂 ==================== -->
+    <section class="slide flex-col max-w-5xl w-full space-y-5" id="slide-7">
+      <div class="border-b border-slate-800 pb-2.5 flex justify-between items-end">
+        <div>
+          <span class="text-emerald-400 text-xs font-semibold tracking-wider uppercase">Cross-Chapter Synthesis</span>
+          <h2 class="text-2xl font-bold text-white mt-1">跨章節終極收斂：現金流量表間接法勾稽前瞻</h2>
+        </div>
+        <span class="text-xs bg-emerald-900/50 text-emerald-300 border border-emerald-700/50 px-2.5 py-0.5 rounded-full">Chapter 14 實戰預演</span>
+      </div>
+
+      <div class="grid md:grid-cols-12 gap-5 items-center">
+        <!-- 左欄：間接法加減項法則 -->
+        <div class="md:col-span-7 bg-slate-900/90 border border-slate-800 rounded-xl p-4 space-y-3 text-xs">
+          <h3 class="font-bold text-white border-b border-slate-800 pb-2 flex justify-between">
+            <span>營業活動現金流量 (間接法直觀加減法則)</span>
+            <span class="text-emerald-400 font-mono font-normal text-[11px]">Net Income $\to$ Cash Flow</span>
+          </h3>
+
+          <div class="space-y-1.5 font-mono text-[11px]">
+            <div class="bg-slate-950 p-2 rounded flex justify-between items-center text-slate-300">
+              <span><strong>本期淨利 (Net Income)</strong></span>
+              <span class="text-slate-500">權責發生制基底</span>
+            </div>
+            
+            <div class="bg-blue-950/40 border border-blue-900/50 p-2 rounded space-y-1 text-[10px]">
+              <span class="text-blue-300 font-bold block">1. 非現金費用與處分損益加回 (Ch 8, 9, 13)：</span>
+              <div class="grid grid-cols-2 gap-1 text-slate-300">
+                <span>(+) 預期信用減損損失 (壞帳費用)</span>
+                <span>(+) 折舊與無形資產攤銷費用</span>
+                <span>(+) 處分資產損失 (投活動加回)</span>
+                <span>(-) 處分資產利益 (扣除重複列入)</span>
+                <span>(-) 採用權益法之投資收益</span>
+                <span>(+) 關聯企業股利收現</span>
+              </div>
+            </div>
+
+            <div class="bg-indigo-950/40 border border-indigo-900/50 p-2 rounded space-y-1 text-[10px]">
+              <span class="text-indigo-300 font-bold block">2. 營運資金變動調節 (Ch 8, 10)：</span>
+              <div class="grid grid-cols-2 gap-1 text-slate-300">
+                <span>(-) 應收帳款增加 (資金套牢未收現)</span>
+                <span>(+) 應付帳款增加 (無息融資保留現金)</span>
+                <span>(+) 應收帳款減少 (舊帳款收現)</span>
+                <span>(-) 應付帳款減少 (實體支付清償)</span>
+                <span>(+) 預收收入增加 (提前取得現金)</span>
+                <span>(+) 保固負債準備淨增加 (非現金費用)</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-slate-950 p-2 rounded text-[10px] text-slate-300 flex justify-between">
+            <span><strong>自由現金流 (FCF)：</strong> $\text{Operating Cash Flow} - \text{CapEx (Ch 9)}$</span>
+            <span class="text-emerald-400 font-semibold">自我造血能力指標</span>
+          </div>
+        </div>
+
+        <!-- 右欄：插圖與 CCC 現金轉換循環 -->
+        <div class="md:col-span-5 space-y-4">
+          <div class="relative group">
+            <div class="absolute -inset-1 bg-gradient-to-r from-emerald-600 to-blue-600 rounded-xl blur opacity-25"></div>
+            <img src="../../assets/istockphoto-1829735010-1024x1024.jpg" 
+                 alt="Cash Flow Analysis" 
+                 class="relative rounded-lg w-full h-44 object-cover shadow-xl border border-slate-700"
+                 onerror="this.src='https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800';">
+          </div>
+
+          <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-3.5 space-y-2 text-xs">
+            <h4 class="font-bold text-white flex justify-between text-xs">
+              <span>現金轉換循環 (CCC)</span>
+              <span class="text-emerald-400 font-mono text-[10px]">Days</span>
+            </h4>
+            <div class="text-[11px] text-center font-mono py-1 bg-slate-950 rounded border border-slate-850 text-slate-200">
+              $$\text{CCC} = \text{DIO (存貨)} + \text{DSO (應收)} - \text{DPO (應付)}$$
+            </div>
+            <p class="text-[10px] text-slate-400 leading-normal">
+              <strong>負 CCC 商業霸權：</strong>蘋果與好市多能做到負的 CCC，代表利用供應商的資金做生意，手頭擁有巨額充沛自由現金流！
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SLIDE 9: 結語與心法 ==================== -->
+    <section class="slide flex-col items-center justify-center max-w-4xl w-full text-center space-y-6 py-4" id="slide-8">
+      <div class="space-y-2">
+        <span class="text-blue-400 text-xs font-semibold tracking-wider uppercase">Executive Summary & Next Steps</span>
+        <h2 class="text-3xl font-black text-white">企管經理人的會計核心心法</h2>
+        <p class="text-slate-400 text-xs max-w-xl mx-auto">
+          「會計不是死記借貸的技術，而是經理人溝通商業實質、配置稀缺資源與防杜營運暴雷的最高語言。」
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-3 gap-4 text-left text-xs w-full">
+        <div class="bg-slate-900/90 border border-slate-800 p-4 rounded-xl space-y-2">
+          <span class="text-blue-400 font-bold block text-sm">1. 識破盈餘操縱</span>
+          <p class="text-slate-400 text-[11px] leading-relaxed">
+            注意帳齡分析違約率的突然變動、維修費用資本化（WorldCom 翻版）、保固準備與商譽減損的「大洗澡」伎倆。
+          </p>
+        </div>
+        <div class="bg-slate-900/90 border border-slate-800 p-4 rounded-xl space-y-2">
+          <span class="text-indigo-400 font-bold block text-sm">2. 警惕假性高獲利</span>
+          <p class="text-slate-400 text-[11px] leading-relaxed">
+            高淨利不代表有現金，檢視應收帳款與存貨是否暴增；高 ROE 可能是過度舉債（權益乘數）硬撐出的流動性炸彈。
+          </p>
+        </div>
+        <div class="bg-slate-900/90 border border-slate-800 p-4 rounded-xl space-y-2">
+          <span class="text-emerald-400 font-bold block text-sm">3. 戰略資金配置</span>
+          <p class="text-slate-400 text-[11px] leading-relaxed">
+            善用股票 FVTOCI 隔離短線股價波動，透過權益法深耕戰略結盟，維持健康合理的現金轉換循環 (CCC)。
+          </p>
+        </div>
+      </div>
+
+      <div class="bg-slate-900/60 border border-slate-800 p-4 rounded-xl w-full flex flex-col sm:flex-row items-center justify-between text-xs text-slate-300 gap-3">
+        <div class="text-left">
+          <strong class="text-white block font-medium">知識庫本體已就緒 (LLM Wiki)</strong>
+          <span class="text-slate-400 text-[11px]">本簡報之所有分錄、題解與公式均可於 `wiki/chapters/` 查閱完整對應筆記</span>
+        </div>
+        <button onclick="goToSlide(0)" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-medium transition shadow-lg shadow-blue-600/30">
+          返回首頁重新導讀
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 底部控制導航列 -->
+  <footer class="w-full bg-slate-900/90 border-t border-slate-800 px-6 py-3 flex items-center justify-between text-xs z-20">
+    <div class="flex items-center space-x-2 text-slate-400">
+      <span class="inline-block w-2 h-2 rounded-full bg-emerald-400"></span>
+      <span id="currentChapterTag">封面導讀</span>
+    </div>
+
+    <div class="flex items-center space-x-4">
+      <button onclick="prevSlide()" class="px-4 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 transition flex items-center space-x-1.5">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        <span>上一頁</span>
+      </button>
+      <button onclick="nextSlide()" class="px-4 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-medium transition shadow-md shadow-blue-600/20 flex items-center space-x-1.5">
+        <span>下一頁</span>
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </footer>
+
+  <!-- 簡報互動腳本 -->
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    const slideIndicator = document.getElementById('slideIndicator');
+    const progressBar = document.getElementById('progressBar');
+    const currentChapterTag = document.getElementById('currentChapterTag');
+    const navPills = document.querySelectorAll('.nav-pill');
+
+    const chapterTitles = [
+      "封面：會計與管理決策之舞",
+      "全景地圖：資產負債表與營運循環",
+      "Chapter 8：應收帳款、備抵法與票據計息",
+      "Chapter 9：不動產廠房設備、折舊方法與無形資產",
+      "Chapter 10：流動負債、負債準備與流動性分析",
+      "Chapter 12：公司權益、庫藏股交易與股利政策",
+      "Chapter 13：金融資產投資、IFRS 9 與權益法機制",
+      "跨章節收斂：現金流量表間接法勾稽前瞻",
+      "結語：企管經理人的會計核心心法"
+    ];
+
+    function updateSlide() {
+      slides.forEach((slide, idx) => {
+        if (idx === currentSlide) {
+          slide.classList.add('active');
+        } else {
+          slide.classList.remove('active');
+        }
+      });
+
+      // 更新進度與標示
+      slideIndicator.textContent = `${String(currentSlide + 1).padStart(2, '0')} / ${String(totalSlides).padStart(2, '0')}`;
+      progressBar.style.width = `${((currentSlide + 1) / totalSlides) * 100}%`;
+      currentChapterTag.textContent = chapterTitles[currentSlide] || "";
+
+      // 更新頂部 Nav Pills 樣式
+      navPills.forEach(pill => {
+        const slideIdx = parseInt(pill.getAttribute('data-slide'));
+        if (slideIdx === currentSlide) {
+          pill.classList.add('bg-blue-600', 'text-white');
+          pill.classList.remove('text-slate-400');
+        } else {
+          pill.classList.remove('bg-blue-600', 'text-white');
+          pill.classList.add('text-slate-400');
+        }
+      });
+
+      // 重新觸發 KaTeX
+      if (window.renderMathInElement) {
+        renderMathInElement(slides[currentSlide], {
+          delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false}
+          ]
+        });
+      }
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides - 1) {
+        currentSlide++;
+        updateSlide();
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 0) {
+        currentSlide--;
+        updateSlide();
+      }
+    }
+
+    function goToSlide(n) {
+      if (n >= 0 && n < totalSlides) {
+        currentSlide = n;
+        updateSlide();
+      }
+    }
+
+    function toggleFullScreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => {});
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
+    }
+
+    // 鍵盤事件監聽
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        nextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        prevSlide();
+      } else if (e.key === 'Home') {
+        goToSlide(0);
+      } else if (e.key === 'End') {
+        goToSlide(totalSlides - 1);
+      } else if (e.key === 'f' || e.key === 'F') {
+        toggleFullScreen();
+      }
+    });
+
+    // 初始化
+    updateSlide();
+  </script>
+</body>
+</html>

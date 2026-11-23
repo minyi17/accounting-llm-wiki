@@ -1,0 +1,1772 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chapter 12: 企業組織、股票交易與權益 (Corporations & Equity) | 莫蘭迪教學簡報</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            morandi: {
+              bg: '#F5F2EB',          /* 溫潤燕麥底色 */
+              card: '#FFFFFF',        /* 純白卡片 */
+              subcard: '#EFECE6',     /* 次級柔灰底 */
+              blue: '#5C768D',        /* 莫蘭迪霧藍 (權益/股票發行) */
+              bluelight: '#E9EFF4',
+              green: '#6B8068',       /* 莫蘭迪鼠尾草綠 (保留盈餘/資產) */
+              greenlight: '#EDF2EC',
+              rose: '#B87D75',        /* 莫蘭迪乾燥玫瑰 (庫藏股/沖減減項) */
+              roselight: '#F9EFEB',
+              clay: '#8D7B68',        /* 莫蘭迪大地暖灰 (負債/股利義務) */
+              claylight: '#F3EFEA',
+              amber: '#C29B38',       /* 莫蘭迪暖芥黃 (指標/重點警示) */
+              amberlight: '#FBF5E8',
+              dark: '#2D3436',        /* 柔和黑炭文字 */
+              muted: '#636E72',       /* 次要說明灰 */
+              border: '#E2DDD5'       /* 柔和邊框線條 */
+            }
+          },
+          fontFamily: {
+            sans: ['"Noto Sans TC"', 'system-ui', '-apple-system', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts: Noto Sans TC -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;800&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- KaTeX for formulas -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
+          onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    body {
+      background-color: #F5F2EB;
+      color: #2D3436;
+      font-family: 'Noto Sans TC', sans-serif;
+      user-select: none;
+    }
+    .slide {
+      display: none;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+    }
+    .slide.active {
+      display: flex;
+      opacity: 1;
+    }
+    .morandi-shadow {
+      box-shadow: 0 10px 25px -5px rgba(92, 118, 141, 0.08), 0 8px 10px -6px rgba(92, 118, 141, 0.04);
+    }
+    .morandi-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F5F2EB;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #C5B9A5;
+      border-radius: 3px;
+    }
+    .tab-btn.active {
+      background-color: #5C768D;
+      color: #FFFFFF;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body class="h-screen w-screen flex flex-col justify-between overflow-hidden bg-morandi-bg">
+
+  <!-- Top Header Navigation & Meta -->
+  <header class="w-full bg-morandi-card border-b border-morandi-border px-8 py-3.5 flex justify-between items-center z-10">
+    <div class="flex items-center gap-4">
+      <div class="bg-morandi-blue text-white w-9 h-9 rounded-xl flex items-center justify-center font-bold text-lg shadow-sm">
+        12
+      </div>
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-bold tracking-wider uppercase text-morandi-blue bg-morandi-bluelight px-2 py-0.5 rounded">
+            Weygandt IFRS 5e
+          </span>
+          <span id="lo-badge" class="text-xs font-semibold text-morandi-muted bg-morandi-subcard px-2 py-0.5 rounded">
+            LO 1~5 總覽
+          </span>
+        </div>
+        <h1 class="text-base font-bold text-morandi-dark leading-tight mt-0.5">
+          企管會計（初會二）教學簡報：公司組織、股票交易與權益
+        </h1>
+      </div>
+    </div>
+
+    <!-- Progress Indicator -->
+    <div class="flex items-center gap-6">
+      <div class="flex flex-col items-end">
+        <span class="text-xs font-medium text-morandi-muted">投影片進度</span>
+        <span id="slide-num" class="text-base font-bold text-morandi-dark tracking-wider">
+          01 / 14
+        </span>
+      </div>
+      <div class="w-36 h-2 bg-morandi-border rounded-full overflow-hidden">
+        <div id="progress-bar" class="h-full bg-morandi-blue rounded-full transition-all duration-300" style="width: 7.14%;"></div>
+      </div>
+      <button onclick="toggleFullScreen()" title="全螢幕切換 (F)" class="p-2 text-morandi-muted hover:text-morandi-dark hover:bg-morandi-subcard rounded-lg transition-colors">
+        <i class="fa-solid fa-expand text-lg"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Slide Container -->
+  <main class="flex-1 w-full max-w-7xl mx-auto px-6 py-4 flex items-center justify-center overflow-y-auto">
+
+    <!-- ==========================================
+         SLIDE 1: 封面與課程地圖 (Morandi Cover)
+         ========================================== -->
+    <div class="slide active w-full flex-col justify-center items-center h-full max-h-[820px]" data-lo="Chapter 12 總導讀">
+      <div class="w-full bg-morandi-card rounded-3xl p-10 morandi-shadow border border-morandi-border flex flex-col md:flex-row items-center gap-10">
+        
+        <!-- Left: Text Title & Pedagogical Focus -->
+        <div class="flex-1 space-y-6 text-left">
+          <div class="flex flex-wrap gap-2">
+            <span class="morandi-badge bg-morandi-bluelight text-morandi-blue">
+              <i class="fa-solid fa-building-columns"></i> Chapter 12
+            </span>
+            <span class="morandi-badge bg-morandi-greenlight text-morandi-green">
+              <i class="fa-solid fa-graduation-cap"></i> 企管系經理人視角
+            </span>
+            <span class="morandi-badge bg-morandi-amberlight text-morandi-amber">
+              <i class="fa-solid fa-palette"></i> 莫蘭迪教學系列
+            </span>
+          </div>
+
+          <div>
+            <h2 class="text-4xl md:text-5xl font-extrabold text-morandi-dark tracking-tight leading-tight">
+              公司組織、股票交易<br><span class="text-morandi-blue">與股東權益全景</span>
+            </h2>
+            <p class="text-lg text-morandi-muted font-medium mt-2">
+              Corporations: Organization, Share Transactions, Dividends, and Equity
+            </p>
+          </div>
+
+          <p class="text-base text-morandi-dark/80 leading-relaxed bg-morandi-subcard/60 p-4 rounded-2xl border-l-4 border-morandi-blue">
+            「資產負債表右下角的權益區塊，是企業營運的終極蓄水池與資本引擎。」<br>
+            從股票發行、庫藏股折衝、股利三階段，到杜邦分析 ROE，掌握企管經理人必備的資本運作語言。
+          </p>
+
+          <div class="grid grid-cols-2 gap-3 text-sm font-semibold">
+            <div class="flex items-center gap-2 p-2.5 bg-morandi-bluelight/60 rounded-xl text-morandi-blue">
+              <i class="fa-solid fa-check-circle"></i> 5 大學習目標 (LO1 - LO5)
+            </div>
+            <div class="flex items-center gap-2 p-2.5 bg-morandi-roselight/60 rounded-xl text-morandi-rose">
+              <i class="fa-solid fa-triangle-exclamation"></i> 破解四大常見會計迷思
+            </div>
+            <div class="flex items-center gap-2 p-2.5 bg-morandi-greenlight/60 rounded-xl text-morandi-green">
+              <i class="fa-solid fa-calculator"></i> Lucerne AG 經典四方案對比
+            </div>
+            <div class="flex items-center gap-2 p-2.5 bg-morandi-claylight/60 rounded-xl text-morandi-clay">
+              <i class="fa-solid fa-chart-pie"></i> ROE 杜邦三因子拆解
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Cropped Avatar / Image & Key Topics -->
+        <div class="w-full md:w-5/12 flex flex-col items-center justify-center p-6 bg-morandi-bg/80 rounded-2xl border border-morandi-border/60">
+          <div class="relative mb-6">
+            <img src="../../assets/istockphoto-1482686055-1024x1024.jpg" 
+                 alt="Business Management Illustration" 
+                 class="w-48 h-48 object-cover object-center rounded-3xl shadow-lg border-4 border-white/80">
+            <div class="absolute -bottom-3 -right-3 bg-morandi-blue text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-md flex items-center gap-1">
+              <i class="fa-solid fa-coins"></i> Equity Focus
+            </div>
+          </div>
+          
+          <div class="w-full space-y-2 text-xs font-medium text-morandi-muted">
+            <div class="flex justify-between items-center bg-white px-3 py-2 rounded-xl border border-morandi-border">
+              <span><strong class="text-morandi-blue">[LO 1]</strong> 公司特性與股權層次</span>
+              <span class="text-morandi-green">Slide 02 - 03</span>
+            </div>
+            <div class="flex justify-between items-center bg-white px-3 py-2 rounded-xl border border-morandi-border">
+              <span><strong class="text-morandi-blue">[LO 2]</strong> 股票發行、特別股與庫藏股</span>
+              <span class="text-morandi-green">Slide 04 - 07</span>
+            </div>
+            <div class="flex justify-between items-center bg-white px-3 py-2 rounded-xl border border-morandi-border">
+              <span><strong class="text-morandi-blue">[LO 3]</strong> 股利政策與股票分割</span>
+              <span class="text-morandi-green">Slide 08 - 10</span>
+            </div>
+            <div class="flex justify-between items-center bg-white px-3 py-2 rounded-xl border border-morandi-border">
+              <span><strong class="text-morandi-blue">[LO 4-5]</strong> 權益表、ROE 與實戰搶答</span>
+              <span class="text-morandi-green">Slide 11 - 14</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==========================================
+         SLIDE 2: [LO 1] 公司的法人人格與股東四大法定特權
+         ========================================== -->
+    <div class="slide w-full flex-col justify-center h-full max-h-[820px]" data-lo="LO 1: 公司組織特性與股東權利">
+      <div class="w-full bg-morandi-card rounded-3xl p-8 morandi-shadow border border-morandi-border flex flex-col justify-between h-full">
+        
+        <div>
+          <!-- Header -->
+          <div class="flex items-center justify-between border-b border-morandi-border pb-4 mb-6">
+            <div>
+              <span class="morandi-badge bg-morandi-bluelight text-morandi-blue mb-1">
+                <i class="fa-solid fa-landmark"></i> [LO 1] 公司組織本質
+              </span>
+              <h2 class="text-3xl font-bold text-morandi-dark">
+                獨立法人人格 (Separate Legal Entity) 與 4 大股東法定特權
+              </h2>
+            </div>
+            <div class="text-right text-xs text-morandi-muted">
+              開辦費 (Organization Costs) 必須<strong>立即費用化</strong>
+            </div>
+          </div>
+
+          <!-- 3 Columns Comparison -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            
+            <!-- Col 1: 公司特性雙面刃 -->
+            <div class="bg-morandi-subcard/50 p-5 rounded-2xl border border-morandi-border flex flex-col justify-between">
+              <div>
+                <h3 class="text-lg font-bold text-morandi-blue flex items-center gap-2 mb-3">
+                  <i class="fa-solid fa-shield-halved"></i> 1. 公司的法律特性
+                </h3>
+                <ul class="space-y-2.5 text-sm text-morandi-dark/90 leading-relaxed">
+                  <li class="flex items-start gap-2">
+                    <i class="fa-solid fa-check text-morandi-green mt-1"></i>
+                    <span><strong>獨立法人人格</strong>：得以自身名義簽約、借款、起訴與被訴。</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <i class="fa-solid fa-check text-morandi-green mt-1"></i>
+                    <span><strong>股東有限責任 (Limited Liability)</strong>：投資人最高損失僅限於其出資額。</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <i class="fa-solid fa-check text-morandi-green mt-1"></i>
+                    <span><strong>永續經營與股份自由轉讓</strong>：經營權與所有權分離，易於籌措巨額資本。</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <i class="fa-solid fa-xmark text-morandi-rose mt-1"></i>
+                    <span><strong>缺點挑戰</strong>：雙重課稅 (Double Taxation)、代理人成本 (Agency Costs)。</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="mt-4 p-3 bg-morandi-roselight/60 rounded-xl text-xs text-morandi-rose font-medium">
+                <i class="fa-solid fa-lightbulb"></i> 代理成本：經理人利益與股東利益衝突時產生的監督與激勵成本。
+              </div>
+            </div>
+
+            <!-- Col 2: 普通股東四大權利 -->
+            <div class="bg-morandi-bluelight/40 p-5 rounded-2xl border border-morandi-blue/30 flex flex-col justify-between">
+              <div>
+                <h3 class="text-lg font-bold text-morandi-blue flex items-center gap-2 mb-3">
+                  <i class="fa-solid fa-users"></i> 2. 普通股東 4 大權益
+                </h3>
+                <div class="space-y-3 text-sm">
+                  <div class="p-2.5 bg-white rounded-xl border border-morandi-border">
+                    <span class="font-bold text-morandi-dark">① 投票表決權 (Vote)</span>
+                    <p class="text-xs text-morandi-muted mt-0.5">選舉董事會、決定重大併購與章程修改。</p>
+                  </div>
+                  <div class="p-2.5 bg-white rounded-xl border border-morandi-border">
+                    <span class="font-bold text-morandi-dark">② 盈餘分配權 (Dividends)</span>
+                    <p class="text-xs text-morandi-muted mt-0.5">按持股比例享有公司董事會宣告之現金或股票股利。</p>
+                  </div>
+                  <div class="p-2.5 bg-white rounded-xl border border-morandi-border">
+                    <span class="font-bold text-morandi-dark">③ 優先認股權 (Preemptive Right)</span>
+                    <p class="text-xs text-morandi-muted mt-0.5">現金增資時得依比例優先認購，<strong>防範持股比例與投票權遭稀釋</strong>。</p>
+                  </div>
+                  <div class="p-2.5 bg-white rounded-xl border border-morandi-border">
+                    <span class="font-bold text-morandi-dark">④ 賸餘財產分派權 (Residual Claim)</span>
+                    <p class="text-xs text-morandi-muted mt-0.5">破產清算時，清償所有債權人與特別股後的最終求償權。</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Col 3: 為什麼開辦費要立即費用化？ (會計思維) -->
+            <div class="bg-morandi-amberlight/50 p-5 rounded-2xl border border-morandi-amber/40 flex flex-col justify-between">
+              <div>
+                <h3 class="text-lg font-bold text-morandi-amber flex items-center gap-2 mb-3">
+                  <i class="fa-solid fa-triangle-exclamation"></i> 3. 關鍵辨析：開辦費
+                </h3>
+                <p class="text-xs text-morandi-dark font-medium leading-relaxed mb-3">
+                  設立公司時支付之律師費、登記規費、發起人費用等：
+                </p>
+                <div class="p-3 bg-white rounded-xl border border-morandi-border text-center mb-3">
+                  <span class="text-xs text-morandi-muted">錯誤直覺：資產負債表列為「無形資產」</span><br>
+                  <span class="text-sm font-bold text-morandi-rose">❌ 資本化 (Capitalize)</span>
+                  <hr class="my-2 border-morandi-border">
+                  <span class="text-xs text-morandi-muted">IFRS 正確準則：當期損益立即認列</span><br>
+                  <span class="text-sm font-bold text-morandi-green">✔ 費用化 (Expensed as Incurred)</span>
+                </div>
+                <div class="text-xs text-morandi-muted leading-relaxed">
+                  <strong>準則邏輯：</strong>資產定義為「具備高度可能流入之未來經濟效益」。新創設立支出無法直接保證未來營收，依穩健原則必須在發生時全數認列為<strong>開辦費用 (Organization Expense)</strong>。
+                </div>
+              </div>
+              <div class="mt-4 p-2.5 bg-white rounded-xl text-xs font-mono text-morandi-dark">
+                Dr. Organization Expense<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;Cr. Cash
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Bottom Tip -->
+        <div class="bg-morandi-subcard p-3 rounded-2xl text-xs text-morandi-muted flex items-center justify-between">
+          <span><i class="fa-solid fa-circle-info text-morandi-blue"></i> 企管重點：優先認股權是保護原始股東經營權不受掠奪的重要屏障。</span>
+          <span class="font-semibold text-morandi-dark">下一頁：解析股數三層次與庫藏股夾心公式 ➔</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==========================================
+         SLIDE 3: [LO 1 混淆點] 股數三大層次：核定 vs 發行 vs 流通在外
+         ========================================== -->
+    <div class="slide w-full flex-col justify-center h-full max-h-[820px]" data-lo="LO 1: 股數三大層次與庫藏股關係">
+      <div class="w-full bg-morandi-card rounded-3xl p-8 morandi-shadow border border-morandi-border flex flex-col justify-between h-full">
+        
+        <div>
+          <!-- Header -->
+          <div class="flex items-center justify-between border-b border-morandi-border pb-4 mb-6">
+            <div>
+              <span class="morandi-badge bg-morandi-amberlight text-morandi-amber mb-1">
+                <i class="fa-solid fa-filter"></i> [LO 1 易混淆點]
+              </span>
+              <h2 class="text-3xl font-bold text-morandi-dark">
+                股數的三大層次：核定股數、發行股數與流通在外股數
+              </h2>
+            </div>
+            <div class="text-right text-xs text-morandi-muted">
+              計算 EPS 與現金股利分派時，<strong>唯一有效的是流通在外股數</strong>
+            </div>
+          </div>
+
+          <!-- Formula Hero Banner -->
+          <div class="bg-morandi-bluelight/60 p-5 rounded-2xl border border-morandi-blue/30 text-center mb-6">
+            <span class="text-xs uppercase font-bold text-morandi-blue tracking-widest">股數階梯關係式</span>
+            <div class="text-xl md:text-2xl font-mono font-bold text-morandi-dark mt-1">
+              $$\text{核定股數 (Authorized)} \ge \text{已發行股數 (Issued)} \ge \text{流通在外股數 (Outstanding)}$$
+            </div>
+            <div class="text-sm font-semibold text-morandi-rose mt-2">
+              $$\text{流通在外股數 (Outstanding)} = \text{已發行股數 (Issued)} - \text{庫藏股股數 (Treasury Shares)}$$
+            </div>
+          </div>
+
+          <!-- 3 Columns Detail Cards -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            
+            <div class="bg-morandi-subcard/50 p-5 rounded-2xl border border-morandi-border">
+              <div class="w-10 h-10 rounded-xl bg-morandi-clay text-white flex items-center justify-center font-bold text-lg mb-3">
+                1
+              </div>
+              <h3 class="text-lg font-bold text-morandi-dark mb-1">核定股數 (Authorized)</h3>
+              <p class="text-xs text-morandi-muted mb-3">公司章程規定可發行之股票最高總額</p>
+              <ul class="text-xs text-morandi-dark/80 space-y-2 leading-relaxed">
+                <li>• 設立時由政府主管機關核准註冊之上限。</li>
+                <li>• <strong>未發行前無任何會計分錄</strong>，僅於資產負債表附註揭露。</li>
+                <li>• 若欲擴增上限，必須召開股東常會修改公司章程。</li>
+              </ul>
+            </div>
+
+            <div class="bg-morandi-bluelight/40 p-5 rounded-2xl border border-morandi-blue/30">
+              <div class="w-10 h-10 rounded-xl bg-morandi-blue text-white flex items-center justify-center font-bold text-lg mb-3">
+                2
+              </div>
+              <h3 class="text-lg font-bold text-morandi-blue mb-1">已發行股數 (Issued)</h3>
+              <p class="text-xs text-morandi-muted mb-3">向投資人募資實際印發／交付之股份總數</p>
+              <ul class="text-xs text-morandi-dark/80 space-y-2 leading-relaxed">
+                <li>• 乘以面額決定資產負債表上的「<strong>普通股股本 (Share Capital—Ordinary)</strong>」。</li>
+                <li>• 一旦發行，即便後續公司買回，<strong>已發行股數亦不減少</strong>（除非辦理正式減資註銷）。</li>
+              </ul>
+            </div>
+
+            <div class="bg-morandi-greenlight/50 p-5 rounded-2xl border border-morandi-green/30">
+              <div class="w-10 h-10 rounded-xl bg-morandi-green text-white flex items-center justify-center font-bold text-lg mb-3">
+                3
+              </div>
+              <h3 class="text-lg font-bold text-morandi-green mb-1">流通在外股數 (Outstanding)</h3>
+              <p class="text-xs text-morandi-muted mb-3">目前實質由外部股東所持有的實際股數</p>
+              <ul class="text-xs text-morandi-dark/80 space-y-2 leading-relaxed">
+                <li>• <strong>真實權益核心</strong>：享有表決權、享有分派股利之合法資格。</li>
+                <li>• 若買回 10,000 股作為庫藏股，流通在外股數立即減少 10,000 股。</li>
+                <li>• <strong>庫藏股不享有股利分派權，亦不享有表決權！</strong></li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Interactive Question Callout -->
+        <div class="bg-morandi-amberlight/60 p-4 rounded-2xl border border-morandi-amber/40 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <span class="w-8 h-8 rounded-full bg-morandi-amber text-white flex items-center justify-center font-bold text-sm">?</span>
+            <div class="text-xs text-morandi-dark">
+              <strong>隨堂抽考：</strong>某公司核定 100,000 股、發行 60,000 股，隨後買回 10,000 股庫藏股。董事會宣告每股發放現金股利 $2，公司共需支付多少現金？
+            </div>
+          </div>
+          <button onclick="document.getElementById('ans-lo1').classList.toggle('hidden')" class="px-3 py-1.5 bg-morandi-amber text-white font-bold text-xs rounded-lg shadow-sm hover:opacity-90">
+            點擊看解析
+          </button>
+        </div>
+        <div id="ans-lo1" class="hidden -mt-2 p-3 bg-white rounded-xl border border-morandi-amber text-xs text-morandi-dark">
+          👉 <strong>正解：$100,000</strong>。股利僅發給「流通在外股數」$= 60,000 - 10,000 = 50,000$ 股。$50,000 \times \$2 = \$100,000$。庫藏股不領取股利！
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==========================================
+         SLIDE 4: [LO 2] 股票發行會計：現金 vs 勞務/非現金資產
+         ========================================== -->
+    <div class="slide w-full flex-col justify-center h-full max-h-[820px]" data-lo="LO 2: 股票發行會計">
+      <div class="w-full bg-morandi-card rounded-3xl p-8 morandi-shadow border border-morandi-border flex flex-col justify-between h-full">
+        
+        <div>
+          <!-- Header -->
+          <div class="flex items-center justify-between border-b border-morandi-border pb-4 mb-6">
+            <div>
+              <span class="morandi-badge bg-morandi-bluelight text-morandi-blue mb-1">
+                <i class="fa-solid fa-file-invoice-dollar"></i> [LO 2] 股票發行會計處理
+              </span>
+              <h2 class="text-3xl font-bold text-morandi-dark">
+                現金發行 vs. 換取勞務／非現金資產之入帳準則
+              </h2>
+            </div>
+            <div class="text-right text-xs text-morandi-muted font-mono">
+              面額 (Par Value) vs. 資本公積 (Share Premium)
+            </div>
+          </div>
+
+          <!-- Dual Panel Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            <!-- Panel 1: 現金發行 (溢價/面額) -->
+            <div class="bg-morandi-subcard/40 p-5 rounded-2xl border border-morandi-border flex flex-col justify-between">
+              <div>
+                <h3 class="text-lg font-bold text-morandi-blue flex items-center gap-2 mb-2">
+                  <i class="fa-solid fa-money-bill-wave"></i> 1. 現金發行股票 (Share Issuance for Cash)
+                </h3>
+                <p class="text-xs text-morandi-muted mb-4">
+                  面額僅為法定資本形式。超額繳納部分全數列為資本公積—普通股股票溢價。
+                </p>
+
+                <!-- Case Example -->
+                <div class="p-3 bg-white rounded-xl border border-morandi-border text-xs space-y-2">
+                  <div class="text-morandi-dark font-semibold">【例題】發行 1,000 股面額 $5 普通股，每股發行價 $12 現金：</div>
+                  <div class="font-mono bg-morandi-bg p-2.5 rounded-lg text-morandi-dark">
+                    借：現金 (Cash) [1,000 × $12]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$12,000<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;貸：普通股股本 (Share Capital—Ordinary) [1,000 × $5]&nbsp;&nbsp;&nbsp;$5,000<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;貸：資本公積—普通股發行溢價 (Share Premium—Ord)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$7,000
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-4 p-3 bg-morandi-bluelight/60 rounded-xl text-xs text-morandi-blue">
+                <i class="fa-solid fa-circle-check"></i> <strong>勾稽關係：</strong>法定股本固定為「股數 × 面額」，經營溢價累積於 Share Premium，兩者合稱「投入資本 (Contributed Capital)」。
+              </div>
+            </div>
+
+            <!-- Panel 2: 勞務與非現金資產 (公允價值判斷法規) -->
+            <div class="bg-morandi-greenlight/40 p-5 rounded-2xl border border-morandi-green/30 flex flex-col justify-between">
+              <div>
+                <h3 class="text-lg font-bold text-morandi-green flex items-center gap-2 mb-2">
+                  <i class="fa-solid fa-handshake"></i> 2. 換取勞務或非現金資產 (Non-Cash Consideration)
+                </h3>
+                <p class="text-xs text-morandi-dark/80 mb-3 leading-relaxed">
+                  <strong>IFRS 評估順位準則：</strong><br>
+                  以「<strong>所獲得資產／勞務之公允價值</strong>」入帳；若其無法可靠衡量，始以「<strong>所發行股票之市場公允價值</strong>」衡量。
+                </p>
+
+                <!-- Case Example -->
+                <div class="p-3 bg-white rounded-xl border border-morandi-border text-xs space-y-2">
+                  <div class="text-morandi-dark font-semibold">【例題】委任律師辦理設立登記，帳單費用 $5,000，發行 400 股面額 $5 普通股抵付：</div>
+                  <div class="font-mono bg-morandi-bg p-2.5 rounded-lg text-morandi-dark">
+                    借：開辦費用 (Organization Expense)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$5,000<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;貸：普通股股本 (Share Capital—Ord) [400 × $5]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$2,000<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;貸：資本公積—普通股發行溢價 (Share Premium—Ord)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$3,000
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-4 p-3 bg-morandi-roselight/60 rounded-xl text-xs text-morandi-rose font-medium">
+                <i class="fa-solid fa-triangle-exclamation"></i> <strong>防杜水水股 (Watered Stock)：</strong>若以過高估價認列非現金資產（如將老舊設備以天價換股），會虛增資產與權益，嚴重損害債權人利益。
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Bottom Guidance -->
+        <div class="bg-morandi-subcard p-3 rounded-2xl text-xs text-morandi-muted flex items-center justify-between">
+          <span><i class="fa-solid fa-scale-balanced text-morandi-blue"></i> 會計原則：客觀可靠性原則 (Objective Reliability) 決定公允價值的取捨。</span>
+          <span class="font-semibold text-morandi-dark">下一頁：深度解構「庫藏股成本法」迷思 ➔</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==========================================
+         SLIDE 5: [LO 2 深度解構] 庫藏股成本法：為何庫藏股絕不是資產？
+         ========================================== -->
+    <div class="slide w-full flex-col justify-center h-full max-h-[820px]" data-lo="LO 2: 庫藏股本質與迷思破解">
+      <div class="w-full bg-morandi-card rounded-3xl p-8 morandi-shadow border border-morandi-border flex flex-col justify-between h-full">
+        
+        <div>
+          <!-- Header -->
+          <div class="flex items-center justify-between border-b border-morandi-border pb-4 mb-6">
+            <div>
+              <span class="morandi-badge bg-morandi-roselight text-morandi-rose mb-1">
+                <i class="fa-solid fa-ban"></i> [LO 2 核心迷思破解]
+              </span>
+              <h2 class="text-3xl font-bold text-morandi-dark">
+                庫藏股票 (Treasury Shares)：為什麼它絕不能列為「資產」？
+              </h2>
+            </div>
+            <div class="text-right text-xs text-morandi-muted">
+              庫藏股是<strong>權益的減項 (Contra-Equity Account)</strong>
+            </div>
+          </div>
+
+          <!-- Myth vs Fact Banner -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            
+            <div class="bg-morandi-roselight/70 p-5 rounded-2xl border border-morandi-rose/40">
+              <div class="flex items-center gap-2 text-morandi-rose font-bold text-base mb-2">
+                <i class="fa-solid fa-circle-xmark text-lg"></i> 常見致命迷思 (Common Misconception)
+              </div>
+              <p class="text-sm text-morandi-dark/90 leading-relaxed">
+                「公司花了現金買進股票，放在保險庫隨時可以賣出換現，這難道不是跟短期的金融資產（如買進台積電股票）一樣是資產嗎？」
+              </p>
+            </div>
+
+            <div class="bg-morandi-greenlight/70 p-5 rounded-2xl border border-morandi-green/40">
+              <div class="flex items-center gap-2 text-morandi-green font-bold text-base mb-2">
+                <i class="fa-solid fa-circle-check text-lg"></i> 企管法理本質 (Economic & Legal Reality)
+              </div>
+              <p class="text-sm text-morandi-dark/90 leading-relaxed">
+                <strong>公司不能持有自己！</strong>資產是對外部資源的求償權。持有自己的股票等於「將資本退還給股東」，本質是<strong>部分清算退股</strong>，因此必須作為<strong>權益之扣減項目</strong>。
+              </p>
+            </div>
+
+          </div>
+
+          <!-- Why Repurchase? (Management Motives) & Accounting Rules -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            <!-- Motives -->
+            <div class="bg-morandi-subcard/50 p-4 rounded-2xl border border-morandi-border">
+              <h4 class="text-sm font-bold text-morandi-dark mb-2.5 flex items-center gap-2">
+                <i class="fa-solid fa-briefcase text-morandi-blue"></i> 經理人回購庫藏股的 4 大商業動機
+              </h4>
+              <ul class="text-xs text-morandi-dark/80 space-y-2">
+                <li><strong>① 發放員工認股權 / 獎酬：</strong>儲備股票供員工分紅、認股權激勵使用。</li>
+                <li><strong>② 人為美化財務指標：</strong>減少流通在外股數，<strong>拉高 EPS 與 ROE</strong>。</li>
+                <li><strong>③ 支撐公司市場股價：</strong>當管理階層認為本益比過低，釋放被低估信號。</li>
+                <li><strong>④ 防禦惡意併購 (Hostile Takeover)：</strong>回購吸收市面浮額，鞏固大股東主控權。</li>
+              </ul>
+            </div>
+
+            <!-- Cost Method Rules -->
+            <div class="bg-morandi-bluelight/40 p-4 rounded-2xl border border-morandi-blue/30">
+              <h4 class="text-sm font-bold text-morandi-blue mb-2.5 flex items-center gap-2">
+                <i class="fa-solid fa-book-bookmark"></i> 成本法 (Cost Method) 會計要則
+              </h4>
+              <ul class="text-xs text-morandi-dark/80 space-y-2">
+                <li>• 買回時<strong>依實際支付之總成本借記「庫藏股票」</strong>，完全不管原股票面額。</li>
+                <li>• 買賣庫藏股<strong>絕不產生「處分損益」</strong>（損益表不認列利益或損失）。</li>
+                <li>• 溢價出售列為「資本公積—庫藏股票交易」；折價出售優先沖抵該資本公積，不足始沖減保留盈餘。</li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Bottom Guidance -->
+        <div class="bg-morandi-subcard p-3 rounded-2xl text-xs text-morandi-muted flex items-center justify-between">
+          <span><i class="fa-solid fa-arrow-trend-up text-morandi-amber"></i> 警示：回購庫藏股雖能拉抬 EPS，但會流出現金並縮減股東權益墊子。</span>
+          <span class="font-semibold text-morandi-dark">下一頁：庫藏股折價再出售之經典分析題 ➔</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==========================================
+         SLIDE 6: [LO 2 實戰分析題] 庫藏股折價再出售
+         ========================================== -->
+    <div class="slide w-full flex-col justify-center h-full max-h-[820px]" data-lo="LO 2: 庫藏股折價處分實戰題">
+      <div class="w-full bg-morandi-card rounded-3xl p-8 morandi-shadow border border-morandi-border flex flex-col justify-between h-full">
+        
+        <div>
+          <!-- Header -->
+          <div class="flex items-center justify-between border-b border-morandi-border pb-4 mb-5">
+            <div>
+              <span class="morandi-badge bg-morandi-roselight text-morandi-rose mb-1">
+                <i class="fa-solid fa-calculator"></i> [LO 2 實戰分析題]
+              </span>
+              <h2 class="text-3xl font-bold text-morandi-dark">
+                庫藏股折價再出售：資本公積不夠沖抵時怎麼辦？
+              </h2>
+            </div>
+            <div class="text-right text-xs text-morandi-muted">
+              三部曲演練：買回 ➔ 溢價出售 ➔ 折價出售擊穿資本公積
+            </div>
+          </div>
+
+          <!-- Scenario Timeline -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-5">
+            
+            <div class="bg-morandi-bg p-4 rounded-2xl border border-morandi-border text-xs">
+              <span class="font-bold text-morandi-blue">步驟 1：買回庫藏股</span>
+              <p class="text-morandi-muted mt-1">
+                以每股 <strong>$80</strong> 現金買回 1,000 股庫藏股（面額 $10）。
+              </p>
+              <div class="mt-2 font-mono bg-white p-2 rounded border border-morandi-border/80">
+                借：庫藏股票 $80,000<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;貸：現金 $80,000
+              </div>
+            </div>
+
+            <div class="bg-morandi-greenlight/40 p-4 rounded-2xl border border-morandi-green/30 text-xs">
+              <span class="font-bold text-morandi-green">步驟 2：溢價出售 500 股</span>
+              <p class="text-morandi-muted mt-1">
+                隨後以每股 <strong>$90</strong> 出售 500 股庫藏股（成本每股 $80）。
+              </p>
+              <div class="mt-2 font-mono bg-white p-2 rounded border border-morandi-border/80">
+                借：現金 $45,000<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;貸：庫藏股票 $40,000<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;貸：資本公積—庫藏股 $5,000
+              </div>
+            </div>
+
+            <div class="bg-morandi-roselight/50 p-4 rounded-2xl border border-morandi-rose/40 text-xs">
+              <span class="font-bold text-morandi-rose">步驟 3：折價出售剩餘 500 股</span>
+              <p class="text-morandi-muted mt-1">
+                最後以每股 <strong>$60</strong> 出售剩餘 500 股（折價缺口達 $10,000）。
+              </p>
+              <div class="mt-2 text-morandi-dark font-medium">
+                資本公積僅有 $5,000 餘額，剩下 $5,000 折價該向誰扣減？
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Step 3 Interactive Reveal & Breakdown -->
+          <div class="bg-morandi-subcard/60 p-5 rounded-2xl border border-morandi-border">
+            <div class="flex items-center justify-between">
+              <div>
+                <h4 class="text-base font-bold text-morandi-dark">
+                  關鍵衝擊：步驟 3 之分錄解析與保留盈餘沖抵順序
+                </h4>
+                <p class="text-xs text-morandi-muted mt-0.5">
+                  折價差額 $= 500 \times (\$80 - \$60) = \$10,000$。絕不能認列「處分損失」！
+                </p>
+              </div>
+              <button onclick="document.getElementById('sol-slide6').classList.toggle('hidden')" class="px-4 py-2 bg-morandi-rose text-white text-xs font-bold rounded-xl shadow-sm hover:opacity-95">
+                切換顯示分錄與邏輯
+              </button>
+            </div>
+
+            <div id="sol-slide6" class="mt-4 pt-4 border-t border-morandi-border/80">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                <div class="font-mono bg-white p-3.5 rounded-xl border border-morandi-border leading-relaxed text-morandi-dark">
+                  <span class="text-morandi-muted">// 正確會計分錄：</span><br>
+                  借：現金 (Cash) [500 × $60]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$30,000<br>
+                  借：資本公積—庫藏股票交易 (Share Premium—Treasury)&nbsp;&nbsp;&nbsp;&nbsp;$5,000<br>
+                  <strong class="text-morandi-rose">借：保留盈餘 (Retained Earnings) [不足差額]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$5,000</strong><br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;貸：庫藏股票 (Treasury Shares) [500 × $80]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$40,000
+                </div>
+
+                <div class="bg-white p-3.5 rounded-xl border border-morandi-border flex flex-col justify-between">
+                  <div class="space-y-1.5 text-morandi-dark/90 leading-relaxed">
+                    <strong class="text-morandi-blue">順序推導原則：</strong>
+                    <p>1. 先將過去同類「庫藏股票交易產生之資本公積」餘額沖抵至零（此題上限為 $5,000）。</p>
+                    <p>2. 不足沖減之差額，直接扣減「<strong>保留盈餘 (Retained Earnings)</strong>」，實質視為分配盈餘給退場股東。</p>
+                  </div>
+                  <div class="text-morandi-rose font-semibold mt-2">
+                    🚫 絕對不得貸記／借記其他普通股發行溢價或損益表！
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Bottom Guidance -->
+        <div class="bg-morandi-subcard p-3 rounded-2xl text-xs text-morandi-muted flex items-center justify-between">
+          <span><i class="fa-solid fa-triangle-exclamation text-morandi-amber"></i> 經典考點：庫藏股交易永不進損益表，只在權益內部科目搬移！</span>
+          <span class="font-semibold text-morandi-dark">下一頁：特別股股利與「積欠股利」特性 ➔</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==========================================
+         SLIDE 7: [LO 2 特別股] 特別股股利分配順序：累積特別股 vs 積欠股利
+         ========================================== -->
+    <div class="slide w-full flex-col justify-center h-full max-h-[820px]" data-lo="LO 2: 特別股權益與積欠股利">
+      <div class="w-full bg-morandi-card rounded-3xl p-8 morandi-shadow border border-morandi-border flex flex-col justify-between h-full">
+        
+        <div>
+          <!-- Header -->
+          <div class="flex items-center justify-between border-b border-morandi-border pb-4 mb-6">
+            <div>
+              <span class="morandi-badge bg-morandi-claylight text-morandi-clay mb-1">
+                <i class="fa-solid fa-crown"></i> [LO 2 特別股權利]
+              </span>
+              <h2 class="text-3xl font-bold text-morandi-dark">
+                特別股 (Preference Shares) 股利順序與「積欠股利」法律本質
+              </h2>
+            </div>
+            <div class="text-right text-xs text-morandi-muted">
+              積欠股利 (Dividends in Arrears) <strong>絕非負債</strong>
+            </div>
+          </div>
+
+          <!-- Feature Cards Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+            
+            <div class="bg-morandi-subcard/50 p-5 rounded-2xl border border-morandi-border">
+              <h3 class="text-base font-bold text-morandi-dark flex items-center gap-2 mb-2">
+                <i class="fa-solid fa-medal text-morandi-amber"></i> 優先受償順位
+              </h3>
+              <p class="text-xs text-morandi-dark/80 leading-relaxed mb-3">
+                特別股股東在<strong>盈餘分派 (Dividends)</strong> 與<strong>清算賸餘財產 (Liquidation)</strong> 上享有優先於普通股之特權，但通常<strong>放棄投票表決權</strong>。
+              </p>
+              <div class="p-2.5 bg-white rounded-xl text-xs font-mono text-morandi-blue">
+                年固定股利率 = 面額 × 指定百分比
+              </div>
+            </div>
+
+            <div class="bg-morandi-claylight/50 p-5 rounded-2xl border border-morandi-clay/40">
+              <h3 class="text-base font-bold text-morandi-clay flex items-center gap-2 mb-2">
+                <i class="fa-solid fa-layer-group"></i> 累積特性 (Cumulative)
+              </h3>
+              <p class="text-xs text-morandi-dark/80 leading-relaxed mb-3">
+                若當年董事會未宣告發放股利，未發放金額將累積至未來年度。<strong>在積欠股利未全額補發前，公司一毛錢普通股股利都不得發放！</strong>
+              </p>
+              <div class="text-xs font-semibold text-morandi-rose">
+                非累積 (Non-Cumulative) 則當期未宣告即永遠失效。
+              </div>
+            </div>
+
+            <div class="bg-morandi-amberlight/50 p-5 rounded-2xl border border-morandi-amber/40">
+              <h3 class="text-base font-bold text-morandi-amber flex items-center gap-2 mb-2">
+                <i class="fa-solid fa-note-sticky"></i> 積欠股利不是負債！
+              </h3>
+              <p class="text-xs text-morandi-dark/80 leading-relaxed mb-2">
+                <strong>為什麼不是負債？</strong><br>
+                因為負債源自「現時法定或推定義務」。在董事會正式決議宣告前，公司無支付股利的法定義務！
+              </p>
+              <div class="p-2 bg-white rounded-lg text-xs font-bold text-morandi-dark border border-morandi-border">
+                處理方式：僅於財報附註揭露 (Footnote Disclosure)
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Allocation Exercise Box -->
+          <div class="bg-morandi-bg p-5 rounded-2xl border border-morandi-border">
+            <h4 class="text-sm font-bold text-morandi-dark mb-2 flex items-center gap-2">
+              <i class="fa-solid fa-calculator text-morandi-blue"></i> 綜合實例推導：特別股 vs 普通股股利瓜分
+            </h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+              <div class="bg-white p-3 rounded-xl border border-morandi-border space-y-1 text-morandi-dark/80">
+                <p>• 累積特別股：7%, 面額 $100，共 1,000 股（每年基本股利 $= \$7,000$）</p>
+                <p>• 普通股：面額 $10，共 20,000 股</p>
+                <p>• 前 2 年均未發放股利（積欠 2 年 $= \$14,000$）</p>
+                <p>• 第 3 年公司決定宣告並發放現金股利總額 <strong>$35,000</strong></p>
+              </div>
+
+              <div class="bg-morandi-bluelight/40 p-3 rounded-xl border border-morandi-blue/30 space-y-1.5 font-mono text-morandi-dark">
+                <div class="flex justify-between">
+                  <span>1. 補發特別股積欠股利 (2年)：</span>
+                  <span class="font-bold text-morandi-clay">$14,000</span>
+                </div>
+                <div class="flex justify-between">
+                  <span>2. 支付特別股當年度股利 (1年)：</span>
+                  <span class="font-bold text-morandi-clay">$7,000</span>
+                </div>
+                <div class="border-t border-morandi-border pt-1 flex justify-between">
+                  <span class="font-bold">特別股合計獲得：</span>
+                  <span class="font-bold text-morandi-blue">$21,000</span>
+                </div>
+                <div class="flex justify-between text-morandi-green font-bold">
+                  <span>3. 普通股獲得剩餘款 ($35,000 - $21,000)：</span>
+                  <span>$14,000 ($0.7/股)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Guidance -->
+        <div class="bg-morandi-subcard p-3 rounded-2xl text-xs text-morandi-muted flex items-center justify-between">
+          <span><i class="fa-solid fa-balance-scale text-morandi-blue"></i> 企管考量：特別股本質介於債券與股票之間，常被用於籌資但不想釋出經營表決權時。</span>
+          <span class="font-semibold text-morandi-dark">下一頁：現金股利三部曲與法定義務時點 ➔</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==========================================
+         SLIDE 8: [LO 3 現金股利] 現金股利三部曲
+         ========================================== -->
+    <div class="slide w-full flex-col justify-center h-full max-h-[820px]" data-lo="LO 3: 現金股利三大關鍵時點">
+      <div class="w-full bg-morandi-card rounded-3xl p-8 morandi-shadow border border-morandi-border flex flex-col justify-between h-full">
+        
+        <div>
+          <!-- Header -->
+          <div class="flex items-center justify-between border-b border-morandi-border pb-4 mb-6">
+            <div>
+              <span class="morandi-badge bg-morandi-greenlight text-morandi-green mb-1">
+                <i class="fa-solid fa-calendar-days"></i> [LO 3 股利會計]
+              </span>
+              <h2 class="text-3xl font-bold text-morandi-dark">
+                現金股利三部曲：法定義務產生時點與會計分錄
+              </h2>
+            </div>
+            <div class="text-right text-xs text-morandi-muted">
+              宣告日產生負債、除息基準日無分錄、發放日清償負債
+            </div>
+          </div>
+
+          <!-- Timeline Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+            
+            <!-- Step 1: Declaration Date -->
+            <div class="bg-morandi-subcard/50 p-5 rounded-2xl border-t-4 border-morandi-rose flex flex-col justify-between">
+              <div>
+                <div class="flex justify-between items-center mb-2">
+                  <span class="text-xs font-bold uppercase text-morandi-rose tracking-wider">時點 1</span>
+                  <span class="text-xs font-semibold bg-morandi-roselight text-morandi-rose px-2 py-0.5 rounded">產生法定義務</span>
+                </div>
+                <h3 class="text-lg font-bold text-morandi-dark mb-2">宣告日 (Declaration Date)</h3>
+                <p class="text-xs text-morandi-dark/80 leading-relaxed mb-4">
+                  董事會通過並正式公告股利發放政策。<strong>一旦宣告，即形成公司的法定流動負債，不得任意撤銷！</strong>
+                </p>
+                <div class="font-mono bg-white p-3 rounded-xl border border-morandi-border text-xs text-morandi-dark space-y-1">
+                  借：現金股利 (Cash Dividends)<br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;貸：應付股利 (Dividends Payable)<br>
+                  <span class="text-[10px] text-morandi-muted leading-tight block pt-1">
+                    *「現金股利」為權益暫存科目，期末結清沖減保留盈餘。
+                  </span>
+                </div>
+              </div>
+              <div class="mt-3 text-xs text-morandi-rose font-medium">
+                負債增加，股東權益減少
+              </div>
+            </div>
+
+            <!-- Step 2: Record Date -->
+            <div class="bg-morandi-subcard/50 p-5 rounded-2xl border-t-4 border-morandi-clay flex flex-col justify-between">
+              <div>
+                <div class="flex justify-between items-center mb-2">
+                  <span class="text-xs font-bold uppercase text-morandi-clay tracking-wider">時點 2</span>
+                  <span class="text-xs font-semibold bg-morandi-claylight text-morandi-clay px-2 py-0.5 rounded">行政名冊造冊</span>
+                </div>
+                <h3 class="text-lg font-bold text-morandi-dark mb-2">除息／基準日 (Record Date)</h3>
+                <p class="text-xs text-morandi-dark/80 leading-relaxed mb-4">
+                  確定具有領取股利資格的股東名冊截止日。<strong>公司資產、負債與權益均未發生變動，故不作任何會計分錄！</strong>
+                </p>
+                <div class="font-mono bg-white p-3 rounded-xl border border-morandi-border text-xs text-center py-6 text-morandi-muted font-bold">
+                  【 不作分錄 (No Entry) 】<br>
+                  <span class="text-[11px] font-normal text-morandi-dark mt-1 block">
+                    僅由股務代理機構核對名冊造冊
+                  </span>
+                </div>
+              </div>
+              <div class="mt-3 text-xs text-morandi-clay font-medium">
+                資產、負債、權益皆維持不變
+              </div>
+            </div>
+
+            <!-- Step 3: Payment Date -->
+            <div class="bg-morandi-subcard/50 p-5 rounded-2xl border-t-4 border-morandi-green flex flex-col justify-between">
+              <div>
+                <div class="flex justify-between items-center mb-2">
+                  <span class="text-xs font-bold uppercase text-morandi-green tracking-wider">時點 3</span>
+                  <span class="text-xs font-semibold bg-morandi-greenlight text-morandi-green px-2 py-0.5 rounded">清償債務流出</span>
+                </div>
+                <h3 class="text-lg font-bold text-morandi-dark mb-2">發放日 (Payment Date)</h3>
+                <p class="text-xs text-morandi-dark/80 leading-relaxed mb-4">
+                  正式寄發支票或匯出股利現金，實質清償宣告日所產生的應付股利負債。
+                </p>
+                <div class="font-mono bg-white p-3 rounded-xl border border-morandi-border text-xs text-morandi-dark space-y-1">
+                  借：應付股利 (Dividends Payable)<br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;貸：現金 (Cash)<br>
+                  <span class="text-[10px] text-morandi-muted leading-tight block pt-1">
+                    *實質清償負債，資產減少，負債減少。
+                  </span>
+                </div>
+              </div>
+              <div class="mt-3 text-xs text-morandi-green font-medium">
+                資產減少，負債減少，權益不變！
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Summary Matrix -->
+          <div class="bg-white p-4 rounded-2xl border border-morandi-border flex items-center justify-between text-xs">
+            <span class="font-bold text-morandi-dark">📊 全程綜合影響 (宣告日至發放日整體淨影響)：</span>
+            <div class="flex gap-4 font-mono">
+              <span class="text-morandi-rose">總資產 (Assets)：減少 (現金流出)</span>
+              <span class="text-morandi-clay">總負債 (Liabilities)：無淨變動</span>
+              <span class="text-morandi-blue font-bold">總權益 (Equity)：減少 (保留盈餘下降)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Guidance -->
+        <div class="bg-morandi-subcard p-3 rounded-2xl text-xs text-morandi-muted flex items-center justify-between">
+          <span><i class="fa-solid fa-lightbulb text-morandi-amber"></i> 經典混淆題：發放日當天「權益總額」完全沒有改變！改變發生在宣告日。</span>
+          <span class="font-semibold text-morandi-dark">下一頁：股票股利 vs. 股票分割 核心對決 ➔</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==========================================
+         SLIDE 9: [LO 3 核心對決] 股票股利 vs. 股票分割
+         ========================================== -->
+    <div class="slide w-full flex-col justify-center h-full max-h-[820px]" data-lo="LO 3: 股票股利 vs 股票分割">
+      <div class="w-full bg-morandi-card rounded-3xl p-8 morandi-shadow border border-morandi-border flex flex-col justify-between h-full">
+        
+        <div>
+          <!-- Header -->
+          <div class="flex items-center justify-between border-b border-morandi-border pb-3 mb-4">
+            <div>
+              <span class="morandi-badge bg-morandi-bluelight text-morandi-blue mb-1">
+                <i class="fa-solid fa-code-compare"></i> [LO 3 核心對決]
+              </span>
+              <h2 class="text-3xl font-bold text-morandi-dark">
+                股票股利 (Share Dividends) vs. 股票分割 (Share Splits)
+              </h2>
+            </div>
+            <!-- Tab Controls -->
+            <div class="flex gap-2 bg-morandi-subcard p-1 rounded-xl">
+              <button onclick="switchSplitTab('matrix')" id="tab-matrix-btn" class="tab-btn active px-3 py-1 text-xs rounded-lg transition-all">
+                總體對比表
+              </button>
+              <button onclick="switchSplitTab('small-large')" id="tab-small-btn" class="tab-btn px-3 py-1 text-xs text-morandi-dark rounded-lg transition-all">
+                小額 vs 大額股票股利
+              </button>
+            </div>
+          </div>
+
+          <!-- TAB 1: 總體對比表 (Default) -->
+          <div id="tab-content-matrix" class="space-y-4">
+            <div class="overflow-x-auto rounded-2xl border border-morandi-border bg-white">
+              <table class="w-full text-left text-xs">
+                <thead class="bg-morandi-subcard/80 text-morandi-dark font-bold border-b border-morandi-border">
+                  <tr>
+                    <th class="p-3">項目與指標</th>
+                    <th class="p-3 text-morandi-blue bg-morandi-bluelight/40">股票股利 (Share Dividends)</th>
+                    <th class="p-3 text-morandi-green bg-morandi-greenlight/40">股票分割 (Share Splits)</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-morandi-border text-morandi-dark/90 font-medium">
+                  <tr>
+                    <td class="p-3 font-bold bg-morandi-bg/40">總資產 (Total Assets)</td>
+                    <td class="p-3 font-semibold text-morandi-muted">不變 (無任何現金流出)</td>
+                    <td class="p-3 font-semibold text-morandi-muted">不變 (無任何現金流出)</td>
+                  </tr>
+                  <tr>
+                    <td class="p-3 font-bold bg-morandi-bg/40">總負債 (Total Liabilities)</td>
+                    <td class="p-3 font-semibold text-morandi-muted">不變</td>
+                    <td class="p-3 font-semibold text-morandi-muted">不變</td>
+                  </tr>
+                  <tr>
+                    <td class="p-3 font-bold bg-morandi-bg/40">普通股股本 (Share Capital)</td>
+                    <td class="p-3 font-bold text-morandi-green">增加 (依面額轉入股本)</td>
+                    <td class="p-3 font-semibold text-morandi-muted">不變 (股數增加但每股面額等比下降)</td>
+                  </tr>
+                  <tr>
+                    <td class="p-3 font-bold bg-morandi-bg/40">保留盈餘 (Retained Earnings)</td>
+                    <td class="p-3 font-bold text-morandi-rose">減少 (資本化轉出至股本/溢價)</td>
+                    <td class="p-3 font-semibold text-morandi-muted">不變 (保留盈餘毫髮無損)</td>
+                  </tr>
+                  <tr>
+                    <td class="p-3 font-bold bg-morandi-bg/40">總股東權益 (Total Equity)</td>
+                    <td class="p-3 font-bold text-morandi-dark">不變！(純粹權益內部科目搬家)</td>
+                    <td class="p-3 font-bold text-morandi-dark">不變！(純粹股數切細)</td>
+                  </tr>
+                  <tr>
+                    <td class="p-3 font-bold bg-morandi-bg/40">每股面額 (Par Value)</td>
+                    <td class="p-3 font-semibold text-morandi-muted">不變</td>
+                    <td class="p-3 font-bold text-morandi-rose">等比例減少 (如 2:1 分割面額減半)</td>
+                  </tr>
+                  <tr>
+                    <td class="p-3 font-bold bg-morandi-bg/40">會計分錄處理</td>
+                    <td class="p-3 font-semibold text-morandi-blue">需做分錄 (借：保留盈餘 / 貸：股本)</td>
+                    <td class="p-3 font-bold text-morandi-clay">不做分錄 (僅備忘記錄股數與面額)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="p-3 bg-morandi-subcard rounded-xl text-xs text-morandi-dark flex items-center justify-between">
+              <span><i class="fa-solid fa-lightbulb text-morandi-amber"></i> 企管視角：兩者均能<strong>增加股票市場流通性 (Liquidity)</strong> 並壓低每股市價，吸引零股與小資散戶投資。</span>
+            </div>
+          </div>
+
+          <!-- TAB 2: 小額 vs 大額股票股利 (Hidden by default) -->
+          <div id="tab-content-small" class="hidden space-y-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              
+              <div class="bg-morandi-bluelight/40 p-4 rounded-2xl border border-morandi-blue/30 text-xs">
+                <div class="flex items-center justify-between mb-2">
+                  <span class="font-bold text-base text-morandi-blue">小額股票股利 (Small Stock Dividend)</span>
+                  <span class="bg-morandi-blue text-white font-bold px-2 py-0.5 rounded text-[11px]">&lt; 20% ~ 25%</span>
+                </div>
+                <p class="text-morandi-dark/90 leading-relaxed mb-3">
+                  由於發放比例小，市場價格不易被稀釋，準則要求依「<strong>公平市價 (Fair Market Value)</strong>」自保留盈餘轉出！
+                </p>
+                <div class="bg-white p-3 rounded-xl border border-morandi-border font-mono space-y-1">
+                  借：股票股利 (保留盈餘) [股數 × 市價]<br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;貸：待分配股票股利 [股數 × 面額]<br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;貸：資本公積—股票發行溢價 [差額]
+                </div>
+              </div>
+
+              <div class="bg-morandi-greenlight/40 p-4 rounded-2xl border border-morandi-green/30 text-xs">
+                <div class="flex items-center justify-between mb-2">
+                  <span class="font-bold text-base text-morandi-green">大額股票股利 (Large Stock Dividend)</span>
+                  <span class="bg-morandi-green text-white font-bold px-2 py-0.5 rounded text-[11px]">&gt; 20% ~ 25%</span>
+                </div>
+                <p class="text-morandi-dark/90 leading-relaxed mb-3">
+                  發放規模龐大將顯著壓低市價，實質接近股票分割，準則規定僅能依「<strong>股票面額 (Par Value)</strong>」轉出！
+                </p>
+                <div class="bg-white p-3 rounded-xl border border-morandi-border font-mono space-y-1">
+                  借：股票股利 (保留盈餘) [股數 × 面額]<br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;貸：待分配股票股利 [股數 × 面額]<br>
+                  <span class="text-morandi-muted">// 不會產生額外的資本公積溢價！</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Bottom Guidance -->
+        <div class="bg-morandi-subcard p-3 rounded-2xl text-xs text-morandi-muted flex items-center justify-between">
+          <span><i class="fa-solid fa-code text-morandi-blue"></i> 註冊科目：「待分配股票股利」不是負債，而是列在<strong>股東權益的普通股股本項下</strong>！</span>
+          <span class="font-semibold text-morandi-dark">下一頁：Lucerne AG 經典四方案深度比較題 ➔</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==========================================
+         SLIDE 10: [LO 3 深度題型] Lucerne AG 經典四方案影響對比矩陣
+         ========================================== -->
+    <div class="slide w-full flex-col justify-center h-full max-h-[820px]" data-lo="LO 3: Lucerne AG 四方案財務影響矩陣">
+      <div class="w-full bg-morandi-card rounded-3xl p-8 morandi-shadow border border-morandi-border flex flex-col justify-between h-full">
+        
+        <div>
+          <!-- Header -->
+          <div class="flex items-center justify-between border-b border-morandi-border pb-3 mb-4">
+            <div>
+              <span class="morandi-badge bg-morandi-amberlight text-morandi-amber mb-1">
+                <i class="fa-solid fa-vial-circle-check"></i> [LO 3 深度題型]
+              </span>
+              <h2 class="text-3xl font-bold text-morandi-dark">
+                Lucerne AG 資本運作四方案：期末資產負債表影響對比
+              </h2>
+            </div>
+            <div class="text-right text-xs text-morandi-muted">
+              基準：股本 $400,000 (40,000股, 面額$10), 溢價 $200,000, 保留盈餘 $600,000, 權益合計 $1,200,000
+            </div>
+          </div>
+
+          <!-- Scenario Toggle Cards -->
+          <div class="grid grid-cols-4 gap-2 mb-3">
+            <button onclick="setLucernePlan('base')" id="plan-btn-base" class="p-2 bg-morandi-blue text-white rounded-xl text-xs font-bold shadow-sm">
+              原始基準狀態
+            </button>
+            <button onclick="setLucernePlan('A')" id="plan-btn-A" class="p-2 bg-morandi-subcard text-morandi-dark hover:bg-morandi-bluelight rounded-xl text-xs font-semibold">
+              方案 A: 現金股利每股$1
+            </button>
+            <button onclick="setLucernePlan('B')" id="plan-btn-B" class="p-2 bg-morandi-subcard text-morandi-dark hover:bg-morandi-bluelight rounded-xl text-xs font-semibold">
+              方案 B: 10%股票股利(市價$18)
+            </button>
+            <button onclick="setLucernePlan('C')" id="plan-btn-C" class="p-2 bg-morandi-subcard text-morandi-dark hover:bg-morandi-bluelight rounded-xl text-xs font-semibold">
+              方案 C: 2:1 股票分割
+            </button>
+          </div>
+
+          <!-- Dynamic Display Matrix -->
+          <div class="overflow-x-auto rounded-2xl border border-morandi-border bg-white mb-3">
+            <table class="w-full text-xs text-left">
+              <thead class="bg-morandi-subcard text-morandi-dark font-bold">
+                <tr>
+                  <th class="p-2.5">會計報表項目</th>
+                  <th class="p-2.5">原始基準 (Base)</th>
+                  <th class="p-2.5 text-morandi-blue">方案 A (現金股利)</th>
+                  <th class="p-2.5 text-morandi-green">方案 B (10%股票股利)</th>
+                  <th class="p-2.5 text-morandi-clay">方案 C (2:1股票分割)</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-morandi-border font-mono text-morandi-dark">
+                <tr id="row-shares">
+                  <td class="p-2.5 font-sans font-bold">流通在外股數</td>
+                  <td class="p-2.5">40,000 股</td>
+                  <td class="p-2.5">40,000 股</td>
+                  <td class="p-2.5 font-bold text-morandi-green">44,000 股 (+10%)</td>
+                  <td class="p-2.5 font-bold text-morandi-clay">80,000 股 (×2)</td>
+                </tr>
+                <tr id="row-par">
+                  <td class="p-2.5 font-sans font-bold">每股面額 (Par)</td>
+                  <td class="p-2.5">$10</td>
+                  <td class="p-2.5">$10</td>
+                  <td class="p-2.5">$10</td>
+                  <td class="p-2.5 font-bold text-morandi-rose">$5 (減半)</td>
+                </tr>
+                <tr id="row-cap">
+                  <td class="p-2.5 font-sans font-bold">普通股股本</td>
+                  <td class="p-2.5">$400,000</td>
+                  <td class="p-2.5">$400,000</td>
+                  <td class="p-2.5 font-bold text-morandi-green">$440,000 (+$40k)</td>
+                  <td class="p-2.5">$400,000</td>
+                </tr>
+                <tr id="row-prem">
+                  <td class="p-2.5 font-sans font-bold">資本公積—發行溢價</td>
+                  <td class="p-2.5">$200,000</td>
+                  <td class="p-2.5">$200,000</td>
+                  <td class="p-2.5 font-bold text-morandi-green">$232,000 (+$32k)</td>
+                  <td class="p-2.5">$200,000</td>
+                </tr>
+                <tr id="row-re">
+                  <td class="p-2.5 font-sans font-bold">保留盈餘 (RE)</td>
+                  <td class="p-2.5">$600,000</td>
+                  <td class="p-2.5 font-bold text-morandi-rose">$560,000 (-$40k)</td>
+                  <td class="p-2.5 font-bold text-morandi-rose">$528,000 (-$72k)</td>
+                  <td class="p-2.5">$600,000</td>
+                </tr>
+                <tr id="row-equity" class="bg-morandi-bg/60 font-bold">
+                  <td class="p-2.5 font-sans">總股東權益 (Total Equity)</td>
+                  <td class="p-2.5">$1,200,000</td>
+                  <td class="p-2.5 text-morandi-rose">$1,160,000 (-$40k)</td>
+                  <td class="p-2.5 text-morandi-dark">$1,200,000 (不變)</td>
+                  <td class="p-2.5 text-morandi-dark">$1,200,000 (不變)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Highlight Box based on selection -->
+          <div id="lucerne-note" class="p-3 bg-morandi-bluelight/60 rounded-xl text-xs text-morandi-dark border border-morandi-blue/30 leading-relaxed">
+            <strong>💡 方案洞察：</strong>方案 A 是唯一會讓「公司總資產」與「總股東權益」實質減少的決策（現金流出 $40,000）；方案 B 與 C 均維持總權益 $1,200,000 絕對不變！
+          </div>
+
+        </div>
+
+        <!-- Bottom Guidance -->
+        <div class="bg-morandi-subcard p-3 rounded-2xl text-xs text-morandi-muted flex items-center justify-between">
+          <span><i class="fa-solid fa-calculator text-morandi-blue"></i> 計算細節：方案 B 小額股票股利轉出金額 $= 4,000 \text{ 股} \times \$18 = \$72,000$。</span>
+          <span class="font-semibold text-morandi-dark">下一頁：權益變動表多欄橫向勾稽全景 ➔</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==========================================
+         SLIDE 11: [LO 4 & 5] 權益變動表全景 (Chamblin AG 實戰)
+         ========================================== -->
+    <div class="slide w-full flex-col justify-center h-full max-h-[820px]" data-lo="LO 4 & 5: 權益變動表編製與勾稽">
+      <div class="w-full bg-morandi-card rounded-3xl p-8 morandi-shadow border border-morandi-border flex flex-col justify-between h-full">
+        
+        <div>
+          <!-- Header -->
+          <div class="flex items-center justify-between border-b border-morandi-border pb-3 mb-4">
+            <div>
+              <span class="morandi-badge bg-morandi-claylight text-morandi-clay mb-1">
+                <i class="fa-solid fa-table-cells-large"></i> [LO 5 報表編製]
+              </span>
+              <h2 class="text-3xl font-bold text-morandi-dark">
+                權益變動表 (Statement of Changes in Equity) 矩陣勾稽
+              </h2>
+            </div>
+            <div class="text-right text-xs text-morandi-muted font-mono">
+              Chamblin AG 綜合實務演練
+            </div>
+          </div>
+
+          <!-- Description -->
+          <p class="text-xs text-morandi-dark/80 mb-3">
+            權益變動表是連通「損益表」、「其他綜合損益」與「資本交易」的跨年度橋樑。橫向代表權益組成項目，縱向代表各交易事項：
+          </p>
+
+          <!-- Statement Table -->
+          <div class="overflow-x-auto rounded-2xl border border-morandi-border bg-white text-xs mb-3">
+            <table class="w-full text-left">
+              <thead class="bg-morandi-subcard text-morandi-dark font-bold border-b border-morandi-border">
+                <tr>
+                  <th class="p-2.5">變動項目 (Events)</th>
+                  <th class="p-2.5">普通股股本</th>
+                  <th class="p-2.5">資本公積</th>
+                  <th class="p-2.5">保留盈餘</th>
+                  <th class="p-2.5 text-morandi-rose">庫藏股票</th>
+                  <th class="p-2.5 text-morandi-blue font-bold bg-morandi-bluelight/30">權益合計 (Total)</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-morandi-border font-mono text-morandi-dark/90">
+                <tr>
+                  <td class="p-2 font-sans font-semibold">期初餘額 (1月1日)</td>
+                  <td class="p-2">$300,000</td>
+                  <td class="p-2">$100,000</td>
+                  <td class="p-2">$450,000</td>
+                  <td class="p-2 text-morandi-rose">($0)</td>
+                  <td class="p-2 font-bold bg-morandi-bluelight/20">$850,000</td>
+                </tr>
+                <tr class="bg-morandi-greenlight/20">
+                  <td class="p-2 font-sans">本期淨利 (Net Income)</td>
+                  <td class="p-2">-</td>
+                  <td class="p-2">-</td>
+                  <td class="p-2 font-bold text-morandi-green">+$180,000</td>
+                  <td class="p-2">-</td>
+                  <td class="p-2 font-bold text-morandi-green bg-morandi-bluelight/20">+$180,000</td>
+                </tr>
+                <tr>
+                  <td class="p-2 font-sans">宣告現金股利</td>
+                  <td class="p-2">-</td>
+                  <td class="p-2">-</td>
+                  <td class="p-2 text-morandi-rose">($60,000)</td>
+                  <td class="p-2">-</td>
+                  <td class="p-2 text-morandi-rose bg-morandi-bluelight/20">($60,000)</td>
+                </tr>
+                <tr>
+                  <td class="p-2 font-sans">發放股票股利</td>
+                  <td class="p-2 font-bold text-morandi-blue">+$30,000</td>
+                  <td class="p-2 font-bold text-morandi-blue">+$15,000</td>
+                  <td class="p-2 text-morandi-rose">($45,000)</td>
+                  <td class="p-2">-</td>
+                  <td class="p-2 font-bold bg-morandi-bluelight/20">$0 (內部搬移)</td>
+                </tr>
+                <tr class="bg-morandi-roselight/20">
+                  <td class="p-2 font-sans">買回庫藏股票</td>
+                  <td class="p-2">-</td>
+                  <td class="p-2">-</td>
+                  <td class="p-2">-</td>
+                  <td class="p-2 font-bold text-morandi-rose">($40,000)</td>
+                  <td class="p-2 text-morandi-rose bg-morandi-bluelight/20">($40,000)</td>
+                </tr>
+                <tr class="bg-morandi-bg/80 font-bold border-t-2 border-morandi-dark">
+                  <td class="p-2.5 font-sans">期末餘額 (12月31日)</td>
+                  <td class="p-2.5">$330,000</td>
+                  <td class="p-2.5">$115,000</td>
+                  <td class="p-2.5">$525,000</td>
+                  <td class="p-2.5 text-morandi-rose">($40,000)</td>
+                  <td class="p-2.5 text-morandi-blue text-sm bg-morandi-bluelight/40">$930,000</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Key Check Highlights -->
+          <div class="grid grid-cols-2 gap-3 text-xs">
+            <div class="p-2.5 bg-morandi-bluelight/50 rounded-xl border border-morandi-blue/30 text-morandi-dark">
+              <strong>橫向加總恆等式：</strong><br>
+              $$\text{Total Equity} = \text{股本} + \text{公積} + \text{保留盈餘} - \text{庫藏股}$$
+              $$330\text{k} + 115\text{k} + 525\text{k} - 40\text{k} = \$930,000$$
+            </div>
+            <div class="p-2.5 bg-morandi-greenlight/50 rounded-xl border border-morandi-green/30 text-morandi-dark">
+              <strong>縱向演變勾稽：</strong><br>
+              $$\text{期初} + \text{淨利} - \text{股利} - \text{庫藏股買回} = \text{期末}$$
+              $$850\text{k} + 180\text{k} - 60\text{k} - 40\text{k} = \$930,000$$
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Guidance -->
+        <div class="bg-morandi-subcard p-3 rounded-2xl text-xs text-morandi-muted flex items-center justify-between">
+          <span><i class="fa-solid fa-check-double text-morandi-green"></i> 審計查核準則：雙向加總嚴格相符，確保無任何未入帳之權益黑洞。</span>
+          <span class="font-semibold text-morandi-dark">下一頁：普通股東權益報酬率 (ROE) 杜邦分析 ➔</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==========================================
+         SLIDE 12: [LO 4 財務指標] 普通股東權益報酬率 (ROE) 杜邦三因子拆解
+         ========================================== -->
+    <div class="slide w-full flex-col justify-center h-full max-h-[820px]" data-lo="LO 4: ROE 指標與杜邦三因子拆解">
+      <div class="w-full bg-morandi-card rounded-3xl p-8 morandi-shadow border border-morandi-border flex flex-col justify-between h-full">
+        
+        <div>
+          <!-- Header -->
+          <div class="flex items-center justify-between border-b border-morandi-border pb-3 mb-4">
+            <div>
+              <span class="morandi-badge bg-morandi-amberlight text-morandi-amber mb-1">
+                <i class="fa-solid fa-chart-line"></i> [LO 4 財務比率]
+              </span>
+              <h2 class="text-3xl font-bold text-morandi-dark">
+                普通股東權益報酬率 (ROE) 杜邦分析與「假性 ROE」警訊
+              </h2>
+            </div>
+            <div class="text-right text-xs text-morandi-muted">
+              分子務必扣除特別股股利！
+            </div>
+          </div>
+
+          <!-- Formula Banner -->
+          <div class="bg-morandi-bluelight/50 p-4 rounded-2xl border border-morandi-blue/30 text-center mb-4">
+            <span class="text-xs uppercase font-bold text-morandi-blue tracking-widest">普通股股東權益報酬率公式</span>
+            <div class="text-lg md:text-xl font-mono font-bold text-morandi-dark mt-1">
+              $$\text{ROE} = \frac{\text{Net Income} - \text{Preference Dividends}}{\text{Average Ordinary Shareholders' Equity}}$$
+            </div>
+          </div>
+
+          <!-- DuPont 3-Factor Breakdown -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+            
+            <div class="bg-morandi-subcard/60 p-4 rounded-2xl border border-morandi-border">
+              <div class="flex items-center gap-2 text-morandi-blue font-bold text-sm mb-1">
+                <i class="fa-solid fa-percent"></i> 1. 淨利率 (Profit Margin)
+              </div>
+              <div class="text-xs font-mono text-morandi-muted mb-2">Net Income ÷ Net Sales</div>
+              <p class="text-xs text-morandi-dark/80 leading-relaxed">
+                衡量企業<strong>產品定價能力與成本管控效率</strong>。每一塊錢營收能轉化為多少實質淨利。
+              </p>
+            </div>
+
+            <div class="bg-morandi-greenlight/50 p-4 rounded-2xl border border-morandi-green/30">
+              <div class="flex items-center gap-2 text-morandi-green font-bold text-sm mb-1">
+                <i class="fa-solid fa-arrows-spin"></i> 2. 資產週轉率 (Asset Turnover)
+              </div>
+              <div class="text-xs font-mono text-morandi-muted mb-2">Net Sales ÷ Average Assets</div>
+              <p class="text-xs text-morandi-dark/80 leading-relaxed">
+                衡量企業<strong>資產營運效率與翻桌率</strong>。每一塊錢資產投入能創造出多少營收。
+              </p>
+            </div>
+
+            <div class="bg-morandi-roselight/60 p-4 rounded-2xl border border-morandi-rose/30">
+              <div class="flex items-center gap-2 text-morandi-rose font-bold text-sm mb-1">
+                <i class="fa-solid fa-scale-unbalanced"></i> 3. 權益乘數 (Equity Multiplier)
+              </div>
+              <div class="text-xs font-mono text-morandi-muted mb-2">Average Assets ÷ Average Equity</div>
+              <p class="text-xs text-morandi-dark/80 leading-relaxed">
+                衡量企業<strong>財務槓桿 (Financial Leverage)</strong>。藉由負債融資放大股東報酬率的放大鏡。
+              </p>
+            </div>
+
+          </div>
+
+          <!-- Managerial Warning Box -->
+          <div class="p-3 bg-morandi-amberlight/60 rounded-2xl border border-morandi-amber/40 flex items-start gap-3 text-xs">
+            <span class="w-7 h-7 rounded-full bg-morandi-amber text-white flex items-center justify-center font-bold text-sm mt-0.5 shrink-0">!</span>
+            <div class="text-morandi-dark leading-relaxed">
+              <strong>企管經理人財務陷阱警訊：</strong><br>
+              若公司透過「借債大量回購庫藏股」，分母之股東權益大幅縮小，會製造出 <strong>ROE 與 EPS 暴增的虛假繁榮</strong>。但此時權益乘數暴衝，企業償債風險倍增，一旦遇到景氣反轉極易陷入財務危機！
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Bottom Guidance -->
+        <div class="bg-morandi-subcard p-3 rounded-2xl text-xs text-morandi-muted flex items-center justify-between">
+          <span><i class="fa-solid fa-microscope text-morandi-blue"></i> 企管洞察：高 ROE 必須來自健康的高淨利與高週轉，而非單純堆砌高財務槓桿。</span>
+          <span class="font-semibold text-morandi-dark">下一頁：舉一反三！三大混淆觀念現場搶答 ➔</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==========================================
+         SLIDE 13: [舉一反三] 企管會計思維大考驗
+         ========================================== -->
+    <div class="slide w-full flex-col justify-center h-full max-h-[820px]" data-lo="實戰演練: 三大混淆觀念舉一反三">
+      <div class="w-full bg-morandi-card rounded-3xl p-8 morandi-shadow border border-morandi-border flex flex-col justify-between h-full">
+        
+        <div>
+          <!-- Header -->
+          <div class="flex items-center justify-between border-b border-morandi-border pb-3 mb-4">
+            <div>
+              <span class="morandi-badge bg-morandi-roselight text-morandi-rose mb-1">
+                <i class="fa-solid fa-brain"></i> [思維大考驗]
+              </span>
+              <h2 class="text-3xl font-bold text-morandi-dark">
+                舉一反三：企管會計思維三大經典考驗
+              </h2>
+            </div>
+            <div class="text-right text-xs text-morandi-muted">
+              點擊題目卡片，立即揭示關鍵解題邏輯
+            </div>
+          </div>
+
+          <!-- 3 Quiz Cards -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-2">
+            
+            <!-- Quiz 1 -->
+            <div class="bg-morandi-bg p-4 rounded-2xl border border-morandi-border flex flex-col justify-between">
+              <div>
+                <span class="text-xs font-bold text-morandi-blue bg-white px-2 py-0.5 rounded shadow-sm">考驗 1：庫藏股地位</span>
+                <h4 class="text-sm font-bold text-morandi-dark mt-2 mb-1">
+                  庫藏股享有股利與表決權嗎？
+                </h4>
+                <p class="text-xs text-morandi-muted mb-3">
+                  若某公司發行 10 萬股，買回 2 萬股庫藏股，股東大會開會時法定出席股數為幾股？
+                </p>
+              </div>
+              <button onclick="document.getElementById('q1-ans').classList.toggle('hidden')" class="w-full py-1.5 bg-morandi-blue text-white text-xs font-bold rounded-xl shadow-sm hover:opacity-95">
+                查看正解
+              </button>
+              <div id="q1-ans" class="hidden mt-2 p-2 bg-white rounded-lg text-xs text-morandi-dark border border-morandi-border">
+                👉 <strong>80,000 股</strong>。庫藏股既<strong>無表決權</strong>，也<strong>不享有股利分派權</strong>！僅以流通在外 8 萬股計算。
+              </div>
+            </div>
+
+            <!-- Quiz 2 -->
+            <div class="bg-morandi-bg p-4 rounded-2xl border border-morandi-border flex flex-col justify-between">
+              <div>
+                <span class="text-xs font-bold text-morandi-green bg-white px-2 py-0.5 rounded shadow-sm">考驗 2：股票分割分錄</span>
+                <h4 class="text-sm font-bold text-morandi-dark mt-2 mb-1">
+                  1 拆 3 股票分割需要借記保留盈餘嗎？
+                </h4>
+                <p class="text-xs text-morandi-muted mb-3">
+                  公司實施 3:1 股票分割，保留盈餘會減少三分之二嗎？分錄如何記載？
+                </p>
+              </div>
+              <button onclick="document.getElementById('q2-ans').classList.toggle('hidden')" class="w-full py-1.5 bg-morandi-green text-white text-xs font-bold rounded-xl shadow-sm hover:opacity-95">
+                查看正解
+              </button>
+              <div id="q2-ans" class="hidden mt-2 p-2 bg-white rounded-lg text-xs text-morandi-dark border border-morandi-border">
+                👉 <strong>完全不作分錄！保留盈餘維持不變</strong>。僅每股面額縮為 1/3，股數乘 3，股本總額與權益毫髮無傷。
+              </div>
+            </div>
+
+            <!-- Quiz 3 -->
+            <div class="bg-morandi-bg p-4 rounded-2xl border border-morandi-border flex flex-col justify-between">
+              <div>
+                <span class="text-xs font-bold text-morandi-rose bg-white px-2 py-0.5 rounded shadow-sm">考驗 3：待分配股票股利</span>
+                <h4 class="text-sm font-bold text-morandi-dark mt-2 mb-1">
+                  宣告股票股利時，待分配股票股利是負債嗎？
+                </h4>
+                <p class="text-xs text-morandi-muted mb-3">
+                  董事會宣告 10% 股票股利，期末尚未發放股票，該科目應列在資產負債表何處？
+                </p>
+              </div>
+              <button onclick="document.getElementById('q3-ans').classList.toggle('hidden')" class="w-full py-1.5 bg-morandi-rose text-white text-xs font-bold rounded-xl shadow-sm hover:opacity-95">
+                查看正解
+              </button>
+              <div id="q3-ans" class="hidden mt-2 p-2 bg-white rounded-lg text-xs text-morandi-dark border border-morandi-border">
+                👉 <strong>絕不是負債！</strong>因為公司未來是要發行股票而非交付現金。它列於<strong>股東權益項下之普通股股本加項</strong>。
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Bottom Guidance -->
+        <div class="bg-morandi-subcard p-3 rounded-2xl text-xs text-morandi-muted flex items-center justify-between">
+          <span><i class="fa-solid fa-graduation-cap text-morandi-blue"></i> 總結心法：掌握本質、洞悉金流、明辨時點，會計不是死背而是商業決策邏輯。</span>
+          <span class="font-semibold text-morandi-dark">下一頁：課程總結與 Wiki 導航 ➔</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==========================================
+         SLIDE 14: [總結與心法] 企管經理人的資本運作心法與 Wiki 導航
+         ========================================== -->
+    <div class="slide w-full flex-col justify-center h-full max-h-[820px]" data-lo="Chapter 12 核心總結與複習指引">
+      <div class="w-full bg-morandi-card rounded-3xl p-8 morandi-shadow border border-morandi-border flex flex-col justify-between h-full">
+        
+        <div>
+          <!-- Header -->
+          <div class="flex items-center justify-between border-b border-morandi-border pb-3 mb-4">
+            <div>
+              <span class="morandi-badge bg-morandi-bluelight text-morandi-blue mb-1">
+                <i class="fa-solid fa-compass"></i> [課程總結與導航]
+              </span>
+              <h2 class="text-3xl font-bold text-morandi-dark">
+                企管經理人資本運作心法與 LLM Wiki 關聯複習
+              </h2>
+            </div>
+            <div class="text-right text-xs text-morandi-muted">
+              Jerry J. Weygandt Financial Accounting 5e
+            </div>
+          </div>
+
+          <!-- Main Layout: 2 Columns -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-3">
+            
+            <!-- Col 1: Managerial Mindset -->
+            <div class="col-span-2 bg-morandi-subcard/50 p-5 rounded-2xl border border-morandi-border flex flex-col justify-between">
+              <div>
+                <h3 class="text-base font-bold text-morandi-blue flex items-center gap-2 mb-3">
+                  <i class="fa-solid fa-lightbulb"></i> 企管經理人必備的 4 大資本運作心法
+                </h3>
+                <div class="space-y-3 text-xs leading-relaxed text-morandi-dark/90">
+                  <div class="p-2.5 bg-white rounded-xl border border-morandi-border">
+                    <strong class="text-morandi-dark">1. 權益是長期的安全墊 (Safety Buffer)：</strong>
+                    <p class="text-morandi-muted mt-0.5">高槓桿能短暫美化 ROE，但保留充足的股東權益才是穿越景氣循環的基石。</p>
+                  </div>
+                  <div class="p-2.5 bg-white rounded-xl border border-morandi-border">
+                    <strong class="text-morandi-dark">2. 股利信號理論 (Signaling Theory)：</strong>
+                    <p class="text-morandi-muted mt-0.5">股利發放不僅是分紅，更向資本市場傳遞經理人對「未來持續自由現金流」的信心。</p>
+                  </div>
+                  <div class="p-2.5 bg-white rounded-xl border border-morandi-border">
+                    <strong class="text-morandi-dark">3. 庫藏股回購雙刃劍：</strong>
+                    <p class="text-morandi-muted mt-0.5">在股價低估時回購能創造股東價值；但在高點追價回購只是耗竭現金、肥了經理人期權。</p>
+                  </div>
+                  <div class="p-2.5 bg-white rounded-xl border border-morandi-border">
+                    <strong class="text-morandi-dark">4. 股票分割與流通性：</strong>
+                    <p class="text-morandi-muted mt-0.5">雖不增加公司實質淨資產，但能有效降低散戶進入門檻，改善籌碼流動性。</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Col 2: Cropped Asset 2 & Wiki Links -->
+            <div class="bg-morandi-bg p-5 rounded-2xl border border-morandi-border flex flex-col items-center justify-between text-center">
+              <div>
+                <img src="../../assets/istockphoto-1829735010-1024x1024.jpg" 
+                     alt="Accounting Analysis Chart" 
+                     class="w-32 h-32 object-cover object-center rounded-2xl shadow-md border-2 border-white mx-auto mb-3">
+                <h4 class="text-xs font-bold text-morandi-dark">LLM Wiki 延伸閱讀主題</h4>
+                <div class="mt-2 space-y-1.5 text-left text-xs">
+                  <div class="bg-white p-2 rounded-lg border border-morandi-border text-morandi-blue font-semibold">
+                    📄 wiki/chapters/Ch12-Corporations-and-Equity.md
+                  </div>
+                  <div class="bg-white p-2 rounded-lg border border-morandi-border text-morandi-blue font-semibold">
+                    📄 wiki/chapters/Ch12-Dividends-and-Retained-Earnings.md
+                  </div>
+                  <div class="bg-white p-2 rounded-lg border border-morandi-border text-morandi-green font-semibold">
+                    📊 wiki/ratios/ROE-and-Shareholder-Metrics.md
+                  </div>
+                  <div class="bg-white p-2 rounded-lg border border-morandi-border text-morandi-clay font-semibold">
+                    🔗 wiki/syntheses/Equity-Financing-and-Cash-Flow.md
+                  </div>
+                </div>
+              </div>
+              <div class="text-[11px] text-morandi-muted mt-2">
+                Single Source of Truth compiled with Karpathy LLM Wiki Architecture
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Bottom Guidance -->
+        <div class="bg-morandi-subcard p-3 rounded-2xl text-xs text-morandi-muted flex items-center justify-between">
+          <span><i class="fa-solid fa-circle-check text-morandi-green"></i> 簡報結束！可使用鍵盤左右方向鍵、空白鍵或下方按鈕隨時切換複習。</span>
+          <button onclick="goToSlide(0)" class="px-3 py-1 bg-morandi-blue text-white rounded-lg text-xs font-bold hover:opacity-90">
+            回到第一頁 ↺
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Bottom Navigation Bar Controls -->
+  <footer class="w-full bg-morandi-card border-t border-morandi-border px-8 py-3 flex justify-between items-center z-10">
+    <div class="flex items-center gap-3">
+      <button onclick="prevSlide()" class="px-4 py-2 bg-morandi-subcard hover:bg-morandi-border text-morandi-dark font-bold text-sm rounded-xl transition-all flex items-center gap-2">
+        <i class="fa-solid fa-arrow-left"></i> 上一頁
+      </button>
+      <button onclick="nextSlide()" class="px-5 py-2 bg-morandi-blue hover:opacity-95 text-white font-bold text-sm rounded-xl transition-all flex items-center gap-2 shadow-sm">
+        下一頁 <i class="fa-solid fa-arrow-right"></i>
+      </button>
+    </div>
+
+    <div class="hidden md:flex items-center gap-3 text-xs text-morandi-muted">
+      <span><kbd class="px-2 py-1 bg-morandi-subcard border border-morandi-border rounded text-[11px]">←</kbd> / <kbd class="px-2 py-1 bg-morandi-subcard border border-morandi-border rounded text-[11px]">→</kbd> 翻頁</span>
+      <span>•</span>
+      <span><kbd class="px-2 py-1 bg-morandi-subcard border border-morandi-border rounded text-[11px]">Space</kbd> 下一頁</span>
+      <span>•</span>
+      <span><kbd class="px-2 py-1 bg-morandi-subcard border border-morandi-border rounded text-[11px]">F</kbd> 全螢幕</span>
+    </div>
+
+    <div class="flex items-center gap-2">
+      <span class="text-xs font-semibold text-morandi-muted">快速跳頁：</span>
+      <select id="slide-jump" onchange="goToSlide(parseInt(this.value))" class="text-xs font-semibold bg-morandi-subcard border border-morandi-border rounded-xl px-2.5 py-1.5 text-morandi-dark focus:outline-none">
+        <option value="0">01. 封面與課程地圖</option>
+        <option value="1">02. [LO 1] 獨立法人人格與四大股東權利</option>
+        <option value="2">03. [LO 1] 股數三大層次與庫藏股</option>
+        <option value="3">04. [LO 2] 現金 vs 勞務/非現金發行股票</option>
+        <option value="4">05. [LO 2] 庫藏股為何不是資產？</option>
+        <option value="5">06. [LO 2] 庫藏股折價再出售實戰題</option>
+        <option value="6">07. [LO 2] 特別股股利與積欠股利</option>
+        <option value="7">08. [LO 3] 現金股利三部曲與法定義務</option>
+        <option value="8">09. [LO 3] 股票股利 vs. 股票分割</option>
+        <option value="9">10. [LO 3] Lucerne AG 四方案深度比較</option>
+        <option value="10">11. [LO 4-5] 權益變動表多欄勾稽</option>
+        <option value="11">12. [LO 4] ROE 杜邦分析與假性 ROE</option>
+        <option value="12">13. [舉一反三] 企管思維三大考驗搶答</option>
+        <option value="13">14. [總結] 資本運作心法與 Wiki 導航</option>
+      </select>
+    </div>
+  </footer>
+
+  <!-- Embedded Interactive JavaScript -->
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    const progressBar = document.getElementById('progress-bar');
+    const slideNum = document.getElementById('slide-num');
+    const loBadge = document.getElementById('lo-badge');
+    const slideJump = document.getElementById('slide-jump');
+
+    function updateSlide() {
+      slides.forEach((s, idx) => {
+        s.classList.toggle('active', idx === currentSlide);
+      });
+
+      // Update counters & progress
+      const progressPercent = ((currentSlide + 1) / totalSlides) * 100;
+      progressBar.style.width = `${progressPercent}%`;
+      const currentFormatted = String(currentSlide + 1).padStart(2, '0');
+      const totalFormatted = String(totalSlides).padStart(2, '0');
+      slideNum.textContent = `${currentFormatted} / ${totalFormatted}`;
+
+      // Update LO badge
+      const activeSlide = slides[currentSlide];
+      loBadge.textContent = activeSlide.getAttribute('data-lo') || 'Chapter 12';
+
+      // Update dropdown select
+      if (slideJump) {
+        slideJump.value = currentSlide;
+      }
+
+      // Re-trigger KaTeX rendering if needed
+      if (window.renderMathInElement) {
+        renderMathInElement(activeSlide, {
+          delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false}
+          ]
+        });
+      }
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides - 1) {
+        currentSlide++;
+        updateSlide();
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 0) {
+        currentSlide--;
+        updateSlide();
+      }
+    }
+
+    function goToSlide(index) {
+      if (index >= 0 && index < totalSlides) {
+        currentSlide = index;
+        updateSlide();
+      }
+    }
+
+    // Keyboard Shortcuts
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'Space') {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        prevSlide();
+      } else if (e.key === 'f' || e.key === 'F') {
+        toggleFullScreen();
+      }
+    });
+
+    // Fullscreen Toggle
+    function toggleFullScreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => {
+          console.log(`Error attempting to enable full-screen: ${err.message}`);
+        });
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
+    }
+
+    // Slide 9: Tab Switching between Matrix & Small/Large
+    function switchSplitTab(tab) {
+      const matrixTab = document.getElementById('tab-content-matrix');
+      const smallTab = document.getElementById('tab-content-small');
+      const matrixBtn = document.getElementById('tab-btn-matrix');
+      const smallBtn = document.getElementById('tab-btn-small');
+
+      if (tab === 'matrix') {
+        matrixTab.classList.remove('hidden');
+        smallTab.classList.add('hidden');
+        matrixBtn.classList.add('active');
+        smallBtn.classList.remove('active');
+      } else {
+        matrixTab.classList.add('hidden');
+        smallTab.classList.remove('hidden');
+        matrixBtn.classList.remove('active');
+        smallBtn.classList.add('active');
+      }
+    }
+
+    // Slide 10: Lucerne AG Plan Highlights
+    function setLucernePlan(plan) {
+      const buttons = ['base', 'A', 'B', 'C'];
+      buttons.forEach(p => {
+        const btn = document.getElementById(`plan-btn-${p}`);
+        if (p === plan) {
+          btn.className = 'p-2 bg-morandi-blue text-white rounded-xl text-xs font-bold shadow-sm';
+        } else {
+          btn.className = 'p-2 bg-morandi-subcard text-morandi-dark hover:bg-morandi-bluelight rounded-xl text-xs font-semibold';
+        }
+      });
+
+      const note = document.getElementById('lucerne-note');
+      if (plan === 'base') {
+        note.innerHTML = `<strong>💡 原始基準狀態：</strong>流通在外 40,000 股，面額 $10，總權益 $1,200,000。請點擊上方按鈕測試 A、B、C 方案對此結構的衝擊。`;
+      } else if (plan === 'A') {
+        note.innerHTML = `<strong>💡 方案 A (現金股利每股 $1)：</strong>流出真實真金白銀！總資產 (現金) 減少 $40,000，保留盈餘減少 $40,000，<strong>總股東權益縮水為 $1,160,000</strong>。股數與面額皆不變。`;
+      } else if (plan === 'B') {
+        note.innerHTML = `<strong>💡 方案 B (10% 股票股利, 市價 $18)：</strong>小額股票股利，保留盈餘轉出 $72,000 ($40,000 轉為股本，超額 $32,000 轉為資本公積)。<strong>總股東權益仍為 $1,200,000</strong>！股數增加至 44,000 股。`;
+      } else if (plan === 'C') {
+        note.innerHTML = `<strong>💡 方案 C (2:1 股票分割)：</strong>純粹切蛋糕！每股面額由 $10 減半為 $5，股數倍增至 80,000 股。<strong>保留盈餘不變、股本不變、總權益 $1,200,000 不變，亦無會計分錄！</strong>`;
+      }
+    }
+
+    // Initialize
+    updateSlide();
+  </script>
+</body>
+</html>
